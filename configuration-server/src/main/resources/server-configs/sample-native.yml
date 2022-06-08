@@ -1,0 +1,3 @@
+spring :
+  profiles : native
+  message : Hello SPring MemberService native Server!!!

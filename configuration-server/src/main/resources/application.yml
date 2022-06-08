@@ -1,0 +1,18 @@
+# bootstrap.yml 공통 환경설정 파일. 기본 프로파일은 native로 지정
+server :
+    port : 9000
+
+spring:
+  application:
+    name: sample
+
+  profiles:
+    active: native, local
+
+  cloud:
+    config:
+      server:
+        native:
+          # search-locations: file:///${user.home}/server-configs # window ?? 
+          # search-locations: file://${user.home}/server-configs # mac linux ?? 
+          search-locations: classpath:/server-configs # local folder
