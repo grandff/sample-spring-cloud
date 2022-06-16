@@ -9,5 +9,8 @@
 ### Circuit Breakers : Gateway에 적용하여 서비스 창에서 계단식 오류로부터 서비스를 보호하고 대체 응답을 제공할 수 있는 기능 제공
 
 ## 프로젝트 목록
-### configuration-server
-### configuration-server-practice : 연습용
+### discovery : spring eureka server
+### order, user : sample micro service(eureka client)
+
+## 참고한 사이트
+[eureka discovery server](https://wonit.tistory.com/495?category=854728)
