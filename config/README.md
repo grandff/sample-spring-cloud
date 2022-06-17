@@ -60,6 +60,18 @@
 8. 테스트를 위해서 Request Mapping End Point 작성(user service)
 > 오류가 하도 많이 나와서 어찌저찌 됐음... 
 
+## 다른 프로필 설정 
+개발환경마다 다른 프로필 적용
+1. config folder에 아래와 같은 파일 추가
+	- application.yml
+	- user-service.yml
+	- user-service-test.yml
+2. 추가한 yml 파일이 맞게 나오는지 확인
+	- localhost:8888/user-service/native
+	- localhost:8888/user-service/test
+3. user service에서 프로필마다 다른 파일을 불러오도록 설정
+
+
 ## 참고
 [2.4 config legacy 설정법](https://multifrontgarden.tistory.com/278)
 [spring client server 설정](https://otrodevym.tistory.com/entry/spring-boot-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0-14-spring-cloud-config-%EC%84%A4%EC%A0%95-%EB%B0%8F-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%86%8C%EC%8A%A4)
