@@ -3,12 +3,21 @@ server :
   
 spring :
   application :
-    name : user-service
-  
-eureka :
-  instance : 
-    instance-id : user-microservice-instance  # eureka server에서 인식할 id
+    name : user-service  
+  config:
+    import: optional:configserver:http://localhost:8888    use-legacy-processing: true
+ 
+eureka:
+  instance: 
+    instance-id: user-microservice-instance  # eureka server에서 인식할 id
       client:    register-with-eureka : true # 해당 서비스는 client로 인식되야하므로 true
     fetch-registry : true # 마찬가지로 true
     service-url : 
       defaultZone : http://localhost:8761/eureka  # eureka 기본 주소 (무조건 카멜표기법으로 해야함)
+      
+# config server actuator
+management:
+  endpoint:      
+    web:
+      exposure:
+        include: refresh, health, beans, info

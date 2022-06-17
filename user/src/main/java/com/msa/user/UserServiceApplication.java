@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
+@RefreshScope
 public class UserServiceApplication {
 
 	public static void main(String[] args) {
@@ -25,6 +27,11 @@ public class UserServiceApplication {
 	@GetMapping("/auth")
 	public String auth(@RequestHeader(value="token") String token) {
 		return "token is " + token;
+	}
+	
+	@GetMapping("/config")
+	public String configTest(@Value("${spring.datasource.url}") String messageOwner, @Value("${spring.datasource.driver}") String messageContent) {
+		return "Configuration File's Message Owner : " + messageOwner + "\n" + "Configuration File's Message Content : " + messageContent;
 	}
 
 }

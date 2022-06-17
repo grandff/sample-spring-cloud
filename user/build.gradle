@@ -30,6 +30,10 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// config 서버 의존성
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'	
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'		
 }
 
 dependencyManagement {
