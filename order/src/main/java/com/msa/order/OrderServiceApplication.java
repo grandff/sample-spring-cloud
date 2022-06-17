@@ -16,7 +16,7 @@ public class OrderServiceApplication {
 		SpringApplication.run(OrderServiceApplication.class, args);
 	}
 
-	@GetMapping("/info")
+	@GetMapping("/order/info")
 	public String info(@Value("${server.port}") String port) {
 		return "Order service 동작 포트 : " + port;
 	}
