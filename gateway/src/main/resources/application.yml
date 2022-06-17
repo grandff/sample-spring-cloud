@@ -18,7 +18,19 @@ spring :
           uri : lb://USER-SERVICE # 포워딩 주소. 로드밸런싱 처리
           predicates :
             - Path=/user/** # /user/** 로 들어오는 요청은 user-service로 인식
+            #- After =2022-06-17T03:00:00  # 이날짜 이후로만 받고 있음
+            #- Cookie = valid, kakao # user service의 valid 필드에 kakao를 넣어야 동작함
+            #- Method = GET  # get인 경우에만 동작          
+          filters :
+            - AddRequestHeader= token, 123456  # name, value 요청시 필요한 헤더 파라미터
+            - AddResponseHeader= authenticated, yes # name, value 응답시 필요한 헤더 파라미터
+            - RewritePath=/user/?(?<segment>.*), /$\{segment}
         - id : order-service
           uri : lb://ORDER-SERVICE # 포워딩 주소. 로드밸런싱 처리
           predicates :
             - Path=/order/** # /order/** 로 들어오는 요청은 order-service로 인식
+            #- Before =2022-06-15T03:00:00  # 이날짜 이전로만 받고 있음
+            #- Cookie = valid, naver # order service의 valid 필드에 naver를 넣어야 동작함
+            #- Method = POST # post인 경우에만 동작
+          filters :
+            - RewritePath=/order/?(?<segment>.*), /$\{segment} 
