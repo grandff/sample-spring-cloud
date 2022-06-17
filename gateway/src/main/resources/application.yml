@@ -22,9 +22,10 @@ spring :
             #- Cookie = valid, kakao # user service의 valid 필드에 kakao를 넣어야 동작함
             #- Method = GET  # get인 경우에만 동작          
           filters :
-            - AddRequestHeader= token, 123456  # name, value 요청시 필요한 헤더 파라미터
-            - AddResponseHeader= authenticated, yes # name, value 응답시 필요한 헤더 파라미터
-            - RewritePath=/user/?(?<segment>.*), /$\{segment}
+            #- AddRequestHeader= token, 123456  # name, value 요청시 필요한 헤더 파라미터
+            #- AddResponseHeader= authenticated, yes # name, value 응답시 필요한 헤더 파라미터
+            - RewritePath=/user/?(?<segment>.*), /$\{segment} # java application의 /user prefix 생략
+            - CustomFilter  # filter 등록
         - id : order-service
           uri : lb://ORDER-SERVICE # 포워딩 주소. 로드밸런싱 처리
           predicates :
@@ -33,4 +34,4 @@ spring :
             #- Cookie = valid, naver # order service의 valid 필드에 naver를 넣어야 동작함
             #- Method = POST # post인 경우에만 동작
           filters :
-            - RewritePath=/order/?(?<segment>.*), /$\{segment} 
+            - RewritePath=/order/?(?<segment>.*), /$\{segment}  # java application의 /order prefix 생략
