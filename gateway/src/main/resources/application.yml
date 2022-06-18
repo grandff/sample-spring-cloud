@@ -2,6 +2,9 @@ server :
   port : 8000
 
 eureka :
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} # random port 사용시 eureka server에 인스턴스가 각각 표시되지 않는다
+    preferIpAddress: true # 서비스간 통신 시 hostname 보다 ip 를 우선
   client :  
     fetch-registry : true
     register-with-eureka : true

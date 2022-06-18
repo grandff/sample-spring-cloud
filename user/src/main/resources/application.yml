@@ -5,7 +5,7 @@ spring :
   application :
     name : user-service  
   config:
-    import: optional:configserver:http://localhost:8888    use-legacy-processing: true
+    import: optional:configserver:http://localhost:8888    use-legacy-processing: true    
  
 eureka:
   instance: 
@@ -14,10 +14,3 @@ eureka:
     fetch-registry : true # 마찬가지로 true
     service-url : 
       defaultZone : http://localhost:8761/eureka  # eureka 기본 주소 (무조건 카멜표기법으로 해야함)
-      
-# config server actuator
-management:
-  endpoint:      
-    web:
-      exposure:
-        include: refresh, health, beans, info

@@ -71,6 +71,29 @@
 	- localhost:8888/user-service/test
 3. user service에서 프로필마다 다른 파일을 불러오도록 설정
 
+## 실시간 반영 설정
+Actuator로 소스 코드 관리
+1. 의존성 추가
+	- spring-boot-starter-actuator
+2. application.yml에 endpoint include
+3. 요청을 보내서 확인하기
+	- http://server.com/actuator/health
+4. 실시간 반영을 위해 refresh도 추가
+5. service로 들어가서 actuator 소스코드 작성(user-service)
+
+## 암호화, 복호화
+- {ciper}라는 문자열이 존재하면 해당 문자열은 암호화 된 것으로 판단하고 각기 다른 서버에 설정 정보를 내릴때, 해당 암호문을 복호화
+- 만약 해당 암호문이 키가 일치하지 않는 등 다른 이유로 복호화가 불가능하면 n/a라는 문자열을 리턴
+
+### 암호화 구현 방법
+1. bootstrap.yml을 이용해 key store 추가
+	- encrypt.key 추가
+2. bootstrap 의존성 추가
+	- spring-cloud-starter-bootstrap
+3. bootstrap.yml에 키 저장
+4. /encrypt, /decrypt 엔드 포인트를 사용해서 암호화
+5. yml 파일에 암호화된 문자열을 넣고 응답으로 복호화된 문자열 받기
+> native 환경에서는 안되는거 같다...
 
 ## 참고
 [2.4 config legacy 설정법](https://multifrontgarden.tistory.com/278)

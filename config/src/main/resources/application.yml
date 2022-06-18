@@ -4,8 +4,10 @@ server:
 spring:
   application:
     name: config-service    
+  config:    
+    use-legacy-processing: true
   profiles:
-    active: native
+    active: native, test
   cloud:
     config:
       server:
@@ -13,3 +15,9 @@ spring:
          search-locations: file:///${user.home}/workspace/cloud-sample-config # Windows
 #      search-locations: file://${user.home}/workspace/cloud-sample-config # MacOS, linux
 #     search-locations: classpath:/server-configs # local folder
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, beans, refresh # health : 현재 상태 확인 가능, refresh : 애플리케이션 설정 값들을 빌드와 배포 없이 다시 받음 단 POST 요청

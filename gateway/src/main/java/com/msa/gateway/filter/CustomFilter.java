@@ -32,7 +32,7 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
 			
 			// request header에서 token 받아오기
 			List<String> token = request.getHeaders().get("token");
-			String tokenString = Objects.requireNonNull(token).get(0);
+			String tokenString = Objects.requireNonNull(token).get(0);			
 			
 			// 토큰 검증
 			if(!tokenString.equals("A.B.C")) {

@@ -3,4 +3,11 @@ spring:
     config:
       uri: http://localhost:8888
       name: user-service
-      profiles: native
+      profile: test
+  
+# config server actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh  # refresh endpoint 활성화              

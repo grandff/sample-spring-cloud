@@ -10,3 +10,9 @@
 2. EnableDiscoveryClient, RestController 어노테이션추가
 	- 서비스 동작 여부를 알 수 있도록 get mapping method 추가
 3. 서비스 실행
+
+## 실시간 반영 설정
+1. 의존성 추가
+	- spring-boot-starter-actuator
+	- bootstrap
+	
