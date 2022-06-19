@@ -1,15 +1,0 @@
-server :
-  port : 8761 # 실행 포트 (보통 유레카 서버는 8761에서 실행함)
-  
-spring:  application:    name: discovery-server # 서비스 이름 식별. ${application.name} 으로 식별 가능
-  security :
-    user :
-      name : admin
-      password : admin
-
-eureka :
-  client :
-    register-with-eureka : false # 클라이언트 동작 여부
-    fetch-registry : false  # 위와 동일하게 설정. 그렇지 않으면 자신을 discovery로 등록하게 됨
-    service-url :
-      defaultZone : http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname:localhost}:8761/eureka

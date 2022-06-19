@@ -1,0 +1,2 @@
+org/egovframe/cloud/config/ConfigApplication.java
+ org.egovframe.cloud.config.ConfigApplication

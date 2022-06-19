@@ -1,0 +1,21 @@
+server:
+  port: 0 # random port
+
+spring:
+  application:
+    name: user-service
+
+# config server actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, info
+  health:
+    mail:
+      enabled: false
+
+info:
+  app:
+    name: Sample Service
+    description: 로그인, 회원관리 및 관리자 기능을 제공
