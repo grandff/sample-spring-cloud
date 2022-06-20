@@ -10,7 +10,14 @@
 
 ## 프로젝트 목록
 ### discovery : spring eureka server
-### order, user : sample micro service(eureka client)
+### config : spring cloud config server
+    - config 설정은 로컬에 저장
+### sample-service : micro service sample template
+
+## 설명
+- board-service : 게시판
+- user-service : 회원관리
+- sample-service : 기본템플릿
 
 ## 참고한 사이트
 [eureka discovery server](https://wonit.tistory.com/495?category=854728)

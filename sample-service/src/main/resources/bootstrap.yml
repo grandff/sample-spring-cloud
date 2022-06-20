@@ -1,8 +1,9 @@
 spring:
   cloud:
     config:
-      uri: http://localhost:8888
-      name: user-service # user-service.yml이 있으면 불러오게 된다
+      #uri: http://localhost:8888 # local
+      uri : https://grandff-sample-spring-cloud-vw64pw99hp975-8888.githubpreview.dev # git codespace
+      name: sample-service # user-service.yml이 있으면 불러오게 된다
 #      name: config-service # config-service의 application.yml 을 불러오게 된다
 #  profiles:
 #    active: prod # application-prod.yml
