@@ -1,3 +1,4 @@
+
 server:
   port: 8000
 
@@ -11,15 +12,9 @@ spring:
           uri: lb://SAMPLE-SERVICE  # 포워딩 주소. 로드밸런싱 처리
           predicates:
             - Path=/sample/**
-          filters:
-            #- RemoveRequestHeader=Cookie
+          filters:            
             - RewritePath=/sample/(?<segment>.*), /$\{segment}  # java application의 /user prefix 생략            
-            #- CustomAuthFilter  # filter 등록        
-      default-filters:
-        - name: GlobalFilter
-          args:
-            preLogger: true
-            postLogger: true
+                  
       discovery:
         locator:
           enabled: true
@@ -30,6 +25,13 @@ management:
     web:
       exposure:
         include: refresh, health, beans, info
+
+eureka:
+  client:
+    register-with-eureka: true # eureka 서버에 등록
+    fetch-registry: true # 외부 검색 가능
+    service-url:
+      defaultZone: http://admin:admin@${eureka.instance.hostname:localhost}:8761/eureka
 
 info:
   app:

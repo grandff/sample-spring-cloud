@@ -12,6 +12,7 @@
 ### discovery : spring eureka server
 ### config : spring cloud config server
     - config 설정은 로컬에 저장
+### gateway : spring cloud gateway server
 ### sample-service : micro service sample template
 
 ## 설명

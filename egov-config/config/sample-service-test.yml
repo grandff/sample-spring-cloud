@@ -1,0 +1,14 @@
+message:
+  owner:  sample-service-test
+  content: sample-service-test 입니다.
+
+spring:
+  datasource:
+    url: dbUrl
+    driver: com.h2.Driver
+    username: admin
+    password: password1234
+
+jwt:
+  token:
+    key: secret_key
