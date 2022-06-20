@@ -2,6 +2,9 @@
 ### ubuntu java 설치 <https://i5i5.tistory.com/266>
 ### vscode extension <https://limjunho.github.io/2021/08/06/VSC-spring-boot.html>
 
+# spring-boot
+### jpa repository <https://araikuma.tistory.com/329>
+
 # spring-cloud
 ### Spring Cloud MSA(1) <https://daddyprogrammer.org/post/4347/spring-cloud-msa-configuration-server/>
 > sample code <https://github.com/codej99/SpringCloudMsa>

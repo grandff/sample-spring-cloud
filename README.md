@@ -16,9 +16,8 @@
 ### sample-service : micro service sample template
 
 ## 설명
-- board-service : 게시판
-- user-service : 회원관리
 - sample-service : 기본템플릿
+- user-service : 회원관리
 
 ## 참고한 사이트
 [eureka discovery server](https://wonit.tistory.com/495?category=854728)

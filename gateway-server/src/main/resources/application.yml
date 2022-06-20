@@ -14,6 +14,20 @@ spring:
             - Path=/sample/**
           filters:            
             - RewritePath=/sample/(?<segment>.*), /$\{segment}  # java application의 /user prefix 생략            
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user/**
+          filters:
+            - RewritePath=/user/(?<segment>.*), /$\{segment}           
+        
+        - id: team-service
+          uri: lb://TEAM-SERVICE
+          predicates:
+            - Path=/team/**
+          filters:
+            - RewritePath=/team/(?<segment>.*), /$\{segment}           
                   
       discovery:
         locator:

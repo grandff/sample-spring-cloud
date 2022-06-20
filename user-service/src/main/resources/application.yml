@@ -1,0 +1,36 @@
+server :
+  port : 0 # random port
+  
+spring :
+  application :
+    name : user-service  
+  datasource: # h2 db setting
+    url: jdbc:h2:mem:userdb
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+ 
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} # random port 사용시 eureka server에 인스턴스가 각각 표시되지 않는다
+    preferIpAddress: true # 서비스간 통신 시 hostname 보다 ip 를 우선
+  client:
+    register-with-eureka: true # eureka 서버에 등록
+    fetch-registry: true # 외부 검색 가능
+    service-url:
+      defaultZone: http://admin:admin@${eureka.instance.hostname:localhost}:8761/eureka
+
+# config server actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, info
+  health:
+    mail:
+      enabled: false
