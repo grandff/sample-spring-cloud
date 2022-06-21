@@ -1,5 +1,7 @@
 package com.cloud.sample.service.teamservice.domain;
 
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +16,8 @@ import javax.persistence.GeneratedValue;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Team{
     @Id @GeneratedValue

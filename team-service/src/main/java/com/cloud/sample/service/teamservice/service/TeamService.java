@@ -54,12 +54,12 @@ public class TeamService{
     public void addTeamMember(Long userId, String teamName){
         Team selectedTeam = teamRepository.findByName(teamName);
 
-        TeamMember teamMember = TeamMember.build()
+        TeamMember teamMember = TeamMember.builder()
             .team(selectedTeam)
             .userId(userId)
             .build();
 
-        teamMemberRepository.sve(teamMember);
+        teamMemberRepository.save(teamMember);
     }
 
       /**

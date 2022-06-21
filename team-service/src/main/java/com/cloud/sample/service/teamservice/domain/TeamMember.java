@@ -1,5 +1,7 @@
 package com.cloud.sample.service.teamservice.domain;
 
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
 
 import com.cloud.sample.service.teamservice.domain.Team;
 
@@ -18,6 +21,8 @@ import com.cloud.sample.service.teamservice.domain.Team;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class TeamMember{
     @Id @GeneratedValue
