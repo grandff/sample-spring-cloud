@@ -1,18 +1,21 @@
-package com.cloud.sample.service.userservice.storage;
+package com.cloud.sample.service.userservice.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cloud.sample.service.userservice.storage.UserRepository;
-import com.cloud.sample.service.userservice.model.UserResponseData;
-import com.cloud.sample.service.userservice.model.UserCreateData;
-import com.cloud.sample.service.userservice.model.User;
+import com.cloud.sample.service.userservice.domain.UserRepository;
+import com.cloud.sample.service.userservice.api.dto.UserResponseData;
+import com.cloud.sample.service.userservice.api.dto.UserCreateData;
+import com.cloud.sample.service.userservice.domain.User;
+
+import lombok.RequiredArgsConstructor;
 
 // 비지니스 로직 담당
 @Service
 @Transactional  // begin, commit 자동 수행, 예외 발생 시 rollback 등 
 public class UserService{
+
     private final UserRepository userRepository;
 
     @Autowired

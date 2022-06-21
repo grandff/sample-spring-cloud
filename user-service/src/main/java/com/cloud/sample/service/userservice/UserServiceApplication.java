@@ -10,10 +10,15 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@ComponentScan(basePackages = {"com.cloud.sample.service.userservice"})
+@EntityScan({"com.cloud.sample.service.userservice.domain"})
+@EnableJpaRepositories(basePackages = {"com.cloud.sample.service.userservice"})
 @SpringBootApplication
 @EnableDiscoveryClient
-@RestController
 public class UserServiceApplication {
 
 	public static void main(String[] args) {

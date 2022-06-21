@@ -1,4 +1,4 @@
-package com.cloud.sample.service.userservice.model;
+package com.cloud.sample.service.userservice.api.dto;
 
 import lombok.Getter;
 import lombok.Setter;

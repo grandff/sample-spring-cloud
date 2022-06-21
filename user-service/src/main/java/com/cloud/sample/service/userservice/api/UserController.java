@@ -1,4 +1,4 @@
-package com.cloud.sample.service.userservice.controller;
+package com.cloud.sample.service.userservice.api;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.cloud.sample.service.userservice.storage.UserService;
-import com.cloud.sample.service.userservice.model.UserResponseData;
-import com.cloud.sample.service.userservice.model.UserCreateData;
+import com.cloud.sample.service.userservice.service.UserService;
+import com.cloud.sample.service.userservice.api.dto.UserResponseData;
+import com.cloud.sample.service.userservice.api.dto.UserCreateData;
 
+import org.springframework.stereotype.Component;
+
+//@Component
 @RestController
 public class UserController{
     // 서비스 생성자 주입
