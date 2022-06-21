@@ -3,6 +3,7 @@ package com.cloud.sample.service.userservice.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.Builder;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 @Getter
 @Setter
 @ToString
+@Builder
 public class User{
     @Id @GeneratedValue
     private Long id;

@@ -14,10 +14,11 @@
     - config 설정은 로컬에 저장
 ### gateway : spring cloud gateway server
 ### sample-service : micro service sample template
+### user-service : user micro service practice code
 
 ## 설명
 - sample-service : 기본템플릿
-- user-service : 회원관리
+- user-service : 회원관리(연습코드)
 
 ## 참고한 사이트
 [eureka discovery server](https://wonit.tistory.com/495?category=854728)
