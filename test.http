@@ -1,0 +1,8 @@
+// users
+POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/users
+
+{
+    "username" : "김정민"
+}
+
+// users/{usersId}

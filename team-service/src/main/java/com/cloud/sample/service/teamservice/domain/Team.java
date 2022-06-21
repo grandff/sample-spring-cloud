@@ -1,7 +1,5 @@
-package com.cloud.sample.service.userservice.domain;
+package com.cloud.sample.service.teamservice.domain;
 
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,15 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 
-@Entity(name="users")   // jpa에서 사용할 entity 이름
+@Entity
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class User{
+public class Team{
     @Id @GeneratedValue
     private Long id;
-    private String username;
+    private String name;
+    private String address;
 }

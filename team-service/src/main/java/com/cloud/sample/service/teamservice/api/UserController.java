@@ -13,8 +13,6 @@ import com.cloud.sample.service.userservice.api.dto.UserCreateData;
 
 import org.springframework.stereotype.Component;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 //@Component
 @RestController
 public class UserController{
@@ -30,15 +28,13 @@ public class UserController{
     public String ping(){
         return "pong";
     }
-    
-    @GetMapping("/users")   // 테스트를 위해 get으로 변경(codespace 문제)
-    public UserResponseData createUser(@RequestParam("username") String username){
-        UserCreateData userCreateData = new UserCreateData();
-        userCreateData.setUsername(username);
+
+    @PostMapping("/users")   
+    public UserResponseData createUser(@RequestBody UserCreateData userCreateData){
         return userService.save(userCreateData);
     }
 
-    @GetMapping("/users/{userId}")     // 테스트를 위해 get으로 변경(codespace 문제)
+    @PostMapping("/users/{userId}")  
     public UserResponseData getUser(@PathVariable("userId") Long id){
         return userService.getUserById(id);
     }
