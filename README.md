@@ -19,6 +19,9 @@
 ## 설명
 - sample-service : 기본템플릿
 - user-service : 회원관리(연습코드)
+- team-service : 팀관리(연습코드)
+> user-service와 team-service는 OpenFeign, Rest Tempalte를 비교하기 위한 연습코드다.
+
 
 ## 참고한 사이트
 [eureka discovery server](https://wonit.tistory.com/495?category=854728)

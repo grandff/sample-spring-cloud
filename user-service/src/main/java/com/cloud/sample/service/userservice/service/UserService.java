@@ -6,10 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cloud.sample.service.userservice.domain.UserRepository;
 import com.cloud.sample.service.userservice.api.dto.UserResponseData;
+import com.cloud.sample.service.userservice.api.dto.TeamResponseData;
 import com.cloud.sample.service.userservice.api.dto.UserCreateData;
 import com.cloud.sample.service.userservice.domain.User;
+import com.cloud.sample.service.userservice.client.TeamServiceClient;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpMethod;
 
 // 비지니스 로직 담당
 @Service
@@ -17,10 +22,14 @@ import lombok.RequiredArgsConstructor;
 public class UserService{
 
     private final UserRepository userRepository;
+    private final RestTemplate restTemplate;    // resttemplate 의존성 추가
+    private final TeamServiceClient teamServiceClient;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, RestTemplate restTemplate, TeamServiceClient teamServiceClient){
         this.userRepository = userRepository;
+        this.restTemplate = restTemplate;
+        this.teamServiceClient = teamServiceClient;
     }
 
     /*
@@ -53,12 +62,23 @@ public class UserService{
         User userOptional = userRepository.findById(id)
             .orElseThrow(RuntimeException::new);
 
-        // rest template or feign client
+        /**
+         * Rest Template 방식
+         */
+        // rest template을 이용해서 team-service의 getTeamByUserId() 호출
+        /*String url = String.format("http://team-service/%s/teams", id); // rest template을 bean으로 주입할 때 @LoadBalanced 어노테이션을 추가했기 때문에 microservice 이름 체계를 이용
+        ResponseEntity<TeamResponseData> responseData = restTemplate.exchange(url, HttpMethod.GET, null, TeamResponseData.class);
+        TeamResponseData team = responseData.getBody();*/
+
+        /**
+         * Feign 방식
+         */
+        TeamResponseData team = teamServiceClient.getTeam(id);
 
         return UserResponseData.builder()
             .userId(userOptional.getId())
             .username(userOptional.getUsername())
-            .team(null) // from team-service
+            .team(team) // from team-service로부터 조회한 team 정보를 담아서 반환
             .build();
       }
 }

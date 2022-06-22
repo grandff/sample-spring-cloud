@@ -1,10 +1,10 @@
 // users
-GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/users?username=test2
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/users?username=김정민
 
 ###
 
 // users/{usersId}
-GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/users/5
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/users/1
 
 ###
 
@@ -18,21 +18,21 @@ POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/te
 Content-Type: application/json; charset=UTF-8
 
 {
-    "name": "홀리쉿"    ,
-    "address" : "한국"
+    "name": "맹구"    ,
+    "address" : "영국"
 }
 
 ###
 
 // 팀멤버추가
-POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/team/5/teams
+POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/team/1/teams
 Content-Type: application/json; charset=UTF-8
 
 {
-    "name":"홀리쉿"
+    "name":"맹구"
 }
 
 ###
 
 // 사용자번호로 조회
-GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/team/5/teams
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/team/1/teams
