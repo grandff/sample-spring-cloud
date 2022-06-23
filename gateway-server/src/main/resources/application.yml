@@ -27,7 +27,14 @@ spring:
           predicates:
             - Path=/team/**
           filters:
-            - RewritePath=/team/(?<segment>.*), /$\{segment}           
+            - RewritePath=/team/(?<segment>.*), /$\{segment}  
+
+        - id: member-service
+          uri: lb://MEMBER-SERVICE
+          predicates:
+            - Path=/member/**
+          filters:
+            - RewritePath=/member/(?<segment>.*), /$\{segment}            
                   
       discovery:
         locator:

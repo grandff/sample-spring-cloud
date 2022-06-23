@@ -1,4 +1,4 @@
-package com.cloud.sample.service.sampleservice;
+package com.cloud.sample.service.memberservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,16 +18,17 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@ComponentScan(basePackages = {"com.cloud.sample.service.sampleservice"})
-//@EntityScan({"com.cloud.sample.service.sampleservice.domain"})
-//@EnableJpaRepositories(basePackages = {"com.cloud.sample.service.sampleservice"})
+@ComponentScan(basePackages = {"com.cloud.sample.service.memberservice"})
+//@EntityScan({"com.cloud.sample.service.memberservice.domain"})
+//@EnableJpaRepositories(basePackages = {"com.cloud.sample.service.memberservice"})
 @SpringBootApplication
 @EnableDiscoveryClient
-//@EnableFeignClients(basePackages = {"com.cloud.sample.service.sampleservice.client"})
-public class SampleServiceApplication {
+@RestController
+//@EnableFeignClients(basePackages = {"com.cloud.sample.service.memberservice.client"})
+public class MemberServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleServiceApplication.class, args);
+		SpringApplication.run(MemberServiceApplication.class, args);
 	}
 
 }

@@ -14,11 +14,11 @@ spring:
          #search-locations: file:///${user.home}/workspace/cloud-sample-config # Windows
 #      search-locations: file://${user.home}/workspace/cloud-sample-config # MacOS, linux
 
-  #rabbitmq:
-  #  host: ${rabbitmq.hostname:localhost}
-    #port: 5672
-    #username: guest
-   # password: guest
+#rabbitmq:
+    host: ${rabbitmq.hostname:localhost}
+    port: 5672
+    username: guest
+    password: guest
 
 # config server actuator
 management:

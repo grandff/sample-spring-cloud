@@ -1,6 +1,9 @@
 plugins {
 	id 'org.springframework.boot' version '2.4.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	
+    // querydsl
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 	id 'java'
 }
 
@@ -15,7 +18,8 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
+	mavenCentral()	
+    maven { url "https://maven.egovframe.go.kr/maven/" } // egovframe maven 원격 저장소
 }
 
 ext {
@@ -23,12 +27,15 @@ ext {
 }
 
 dependencies {
+    // egov 공통 모듈 일단 제외하고 테스트 중 ...
+    
 	implementation 'org.springframework.boot:spring-boot-starter-web'	// web
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'	// eureka
 	compileOnly 'org.projectlombok:lombok'	//lombok
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
+	    
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'    // config
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap' // config
 	
@@ -40,6 +47,17 @@ dependencies {
 	runtimeOnly 'com.h2database:h2' // h2 database	
 
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign' // feignclient
+	
+    // querydsl
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-core'
+	
+    // openapi docs
+    implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.5.8'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	
+    implementation 'mysql:mysql-connector-java'	// mysql(dev only)
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'	// jwt
 }
 
 dependencyManagement {
@@ -51,3 +69,20 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+// querydsl 추가 끝

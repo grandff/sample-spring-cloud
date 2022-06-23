@@ -11,7 +11,11 @@ public class FeignError implements ErrorDecoder{
             case 404:
                 if(methodKey.contains("getOrders")){
                     return new Exception("해당 사용자는 팀에 가입되어 있지 않습니다.");                    
-                }                                
+                }           
+                
+            case 500:
+                System.out.println(methodKey);
+                return new Exception("해당 사용자는 팀에 가입되어 있지 않습니다.");                    
             
             default:
                 return new Exception("오류 발생");

@@ -36,3 +36,10 @@ Content-Type: application/json; charset=UTF-8
 
 // 사용자번호로 조회
 GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/team/1/teams
+
+
+
+###
+
+// member ping
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/ping
