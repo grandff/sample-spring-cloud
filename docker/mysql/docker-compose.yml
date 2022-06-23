@@ -3,17 +3,17 @@ services:
   mysql:
     image: mysql:5.7
     environment:  # 환경변수
-      MYSQL_USER: msaportal
-      MYSQL_DATABASE: msaportal
-      MYSQL_PASSWORD: msaportal
+      MYSQL_USER: msasample
+      MYSQL_DATABASE: msasample
+      MYSQL_PASSWORD: msasample
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_HOST: "%"
       TZ: Asia/Seoul
     command: # 명령어 실행 - characterset 지정
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - "./init/:/docker-entrypoint-initdb.d/"
+    #volumes:
+    #  - "./init/:/docker-entrypoint-initdb.d/"
     platform: linux/x86_64 #m1에서 플랫폼을 명시해주지 않으면 에러남
     ports:
       - "3306:3306"

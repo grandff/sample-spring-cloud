@@ -30,7 +30,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, info
+        include: busrefresh, refresh, health, beans, info
   health:
     mail:
       enabled: false

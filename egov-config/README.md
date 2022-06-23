@@ -95,6 +95,27 @@ Actuator로 소스 코드 관리
 5. yml 파일에 암호화된 문자열을 넣고 응답으로 복호화된 문자열 받기
 > native 환경에서는 안되는거 같다...
 
+## Spring Cloud Bus
+분산 시스템 환경, 마이크로 서비스 환경에서 각각의 노드나 서비스를 연결시켜주는 경량 메시지 브로커
+
+### Spring Cloud Bus가 적용된 설정 정보 적용 과정
+1. configuration file을 remote repository에 push
+2. Spring Cloud Bus가 Message Broker로 변경된 설정 정보에 대한 Messaeg 발행
+3. Message Broker는 설정 정보 저장
+4. 개발자가 설정 정보가 변경되었음을 Config Server에 알림
+5. Message Broker가 해당 메시지를 Subscribing 하고 있는 Application 들에게 Broadcasting
+6. 각각의 Application은 Spring Cloud Bus가 받은 설정 정보 반영
+
+### Rabbit MQ 실습 순서
+1. 각각의 마이크로서비스에 Spring Boot Actuactor와 Spring Cloud Bus 의존성 추가
+	> implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'	// bus + rabbitmq
+	> implementation 'org.springframework.boot:spring-boot-starter-actuator'	// actuator
+2. application.yml 파일에서 Spring Cloud Bus와 actuactor 정보 추가
+3. Rabbit MQ -> Config Service -> Micro Services 차례로 실행
+4. 설정 정보 수정 후 github push(나는 그냥 native에서 변경..?)
+5. Config Server의 Bus Refresh
+6. 테스트
+
 ## 참고
 [2.4 config legacy 설정법](https://multifrontgarden.tistory.com/278)
 [spring client server 설정](https://otrodevym.tistory.com/entry/spring-boot-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0-14-spring-cloud-config-%EC%84%A4%EC%A0%95-%EB%B0%8F-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%86%8C%EC%8A%A4)

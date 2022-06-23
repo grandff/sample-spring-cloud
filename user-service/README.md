@@ -13,5 +13,8 @@
     > 만약 못찾는다? MainApplication에 basepackage 명시
 3. 호출
 
+## OpenFeign 에러 반환 처리
+1. ErrorDecoder 인터페이스를 상속받는 클래스 생성
+
 ## OpenFeign 참조할만한 사이트
 - https://techblog.woowahan.com/2630/
