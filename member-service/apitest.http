@@ -13,10 +13,10 @@ POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/me
 POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/api/join
 Content-Type: application/json; charset=UTF-8
 
-{
+{   
     "userId" : "test",
     "userName" : "테스트",
     "password" : "cjswo123!",
     "tel" : "010-1111-2222",
-    "email" : "dev@dev.com"
+    "email" : "dev@dev"
 }

@@ -20,13 +20,13 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
-@ComponentScan(basePackages = {"org.egovframe.cloud.common", "org.egovframe.cloud.servlet","com.cloud.sample.service.memberservice"})
-@EntityScan({"org.egovframe.cloud.servlet.domain","com.cloud.sample.service.memberservice.domain"})
+@ComponentScan(basePackages = {"com.cloud.sample.service.memberservice"})
+@EntityScan({"com.cloud.sample.service.memberservice.domain"})
 @EnableJpaRepositories(basePackages = {"com.cloud.sample.service.memberservice"})
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
-//@EnableFeignClients(basePackages = {"com.cloud.sample.service.memberservice.client"})
+@EnableFeignClients(basePackages = {"com.cloud.sample.service.memberservice.client"})
 public class MemberServiceApplication {
 
 	public static void main(String[] args) {

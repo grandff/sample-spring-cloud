@@ -28,10 +28,10 @@ ext {
 
 dependencies {
     //implementation files('../../module-common/build/libs/module-common-0.1.jar') // 공통 모듈, @ComponentScan(basePackages={"org.egovframe.cloud"}) 추가해야 적용된다
-    implementation 'org.egovframe.cloud:module-common:0.1'
-    implementation('org.egovframe.rte:org.egovframe.rte.fdl.cmmn:4.0.0') {
-        exclude group: 'org.egovframe.rte', module: 'org.egovframe.rte.fdl.logging'
-    }
+    //implementation 'org.egovframe.cloud:module-common:0.1'
+    //implementation('org.egovframe.rte:org.egovframe.rte.fdl.cmmn:4.0.0') {
+    //    exclude group: 'org.egovframe.rte', module: 'org.egovframe.rte.fdl.logging'
+    //}
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'	// web
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'	// eureka
