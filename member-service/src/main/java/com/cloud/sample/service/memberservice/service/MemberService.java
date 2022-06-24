@@ -6,6 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.cloud.sample.service.memberservice.api.dto.MemberJoinRequestDto;
@@ -17,11 +20,19 @@ import com.cloud.sample.service.memberservice.common.CommonException;
 import com.cloud.sample.service.memberservice.common.CommonMessageException;
 import com.cloud.sample.service.memberservice.common.dto.ErrorCode;
 
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.util.ArrayList;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 // 비지니스 로직 담당
 @Service
 @Transactional  // begin, commit 자동 수행, 예외 발생 시 rollback 등 
 @RequiredArgsConstructor
-public class MemberService{
+public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -59,5 +70,26 @@ public class MemberService{
         memberRepository.save(member);
 
         return true;
+    }
+
+    // 스프링 시큐리티에 의해 로그인 대상 사용자의 패스워드와 권한 정보를 DB에서 조회해서 UserDetails를 리턴
+    // SecurityConfig > configure > UserDetaisService 메소드에서 호출
+    @Override
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException{
+        // 로그인 실패시 로그에 남기기 위해 설정
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        request.setAttribute("userId", userId);
+        System.out.println("아이디 정보 :: " + userId);
+
+        // 사용자 존재여부 확인
+        Member member = memberRepository.findByUserId(userId)
+                        .orElseThrow(() -> new CommonMessageException("해당 사용자가 존재하지 않습니다."));
+        
+        // 권한 설정
+        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("All")); // 별도 권한 설정한게 없으면 아무거나 넣어주거나 아예 empty list 를 줘야함. 빈 string 넣으면 error 
+
+        // 사용자 리턴
+        return new User(member.getUserId(), member.getPassword(), authorities);
     }
 }

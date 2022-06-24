@@ -17,7 +17,7 @@ import javax.validation.constraints.Pattern;
 @Setter
 @ToString
 @NoArgsConstructor
-public class MemberJoinRequestDto{
+public class MemberJoinRequestDto{  // 회원가입에 필요한 데이터
     // 아이디
     @NotBlank(message="아이디는 필수입니다.")
     private String userId;

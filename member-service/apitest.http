@@ -20,3 +20,18 @@ Content-Type: application/json; charset=UTF-8
     "tel" : "010-1111-2222",
     "email" : "dev@dev"
 }
+
+###
+
+// 회원조회
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/api/detail/test
+
+###
+
+// 로그인??
+POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/login
+Content-Type: application/json; charset=UTF-8
+
+{   
+    "userId" : "test"
+}
