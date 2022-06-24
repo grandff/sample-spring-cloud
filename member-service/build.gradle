@@ -17,14 +17,22 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
+	mavenCentral()    
+    maven { url "https://maven.egovframe.go.kr/maven/" } // egovframe maven 원격 저장소
 }
 
 ext {
-	set('springCloudVersion', "2020.0.3")
+	set('springCloudVersion', "2020.0.3")    
+    set('log4j2.version', "2.17.1") // log4j 보안 패치
 }
 
 dependencies {
+    //implementation files('../../module-common/build/libs/module-common-0.1.jar') // 공통 모듈, @ComponentScan(basePackages={"org.egovframe.cloud"}) 추가해야 적용된다
+    implementation 'org.egovframe.cloud:module-common:0.1'
+    implementation('org.egovframe.rte:org.egovframe.rte.fdl.cmmn:4.0.0') {
+        exclude group: 'org.egovframe.rte', module: 'org.egovframe.rte.fdl.logging'
+    }
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'	// web
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'	// eureka
 	compileOnly 'org.projectlombok:lombok'	//lombok

@@ -1,6 +1,7 @@
 package com.cloud.sample.service.memberservice;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -18,9 +19,10 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@ComponentScan(basePackages = {"com.cloud.sample.service.memberservice"})
-//@EntityScan({"com.cloud.sample.service.memberservice.domain"})
-//@EnableJpaRepositories(basePackages = {"com.cloud.sample.service.memberservice"})
+
+@ComponentScan(basePackages = {"org.egovframe.cloud.common", "org.egovframe.cloud.servlet","com.cloud.sample.service.memberservice"})
+@EntityScan({"org.egovframe.cloud.servlet.domain","com.cloud.sample.service.memberservice.domain"})
+@EnableJpaRepositories(basePackages = {"com.cloud.sample.service.memberservice"})
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
@@ -31,4 +33,9 @@ public class MemberServiceApplication {
 		SpringApplication.run(MemberServiceApplication.class, args);
 	}
 
+	// security encoder bean 등록
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
