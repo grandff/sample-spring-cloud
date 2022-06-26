@@ -1,5 +1,6 @@
 # sample-spring-cloud
 ### spring cloud sample 프로젝트
+### Gradle 7.4.2 / Spring Boot 2.4.5 / Spring CLoud 2020.0.3 / OpenJDK 11
 
 ## 용어 설명
 ### Configuration Server : 시스템의 환경 설정을 중앙화하고 실시간으로 설정을 변경하고 전파하는 기능을 제공

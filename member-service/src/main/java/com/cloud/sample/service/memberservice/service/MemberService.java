@@ -92,4 +92,10 @@ public class MemberService implements UserDetailsService {
         // 사용자 리턴
         return new User(member.getUserId(), member.getPassword(), authorities);
     }
+
+    // 로그인후처리
+    @Transactional
+    public void loginCallback(){
+        
+    }
 }

@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.cloud.sample.service.memberservice.domain.Member;
 import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
 
 @Component
@@ -73,6 +74,28 @@ public class TokenProvider {
     }
 
     // 사용자가 있으면 access token을 새로 발급해서 리턴
+    public String refreshToken(String refreshToken, HttpServletResponse response){
+        // refresh token으로 유효한 사용자 찾기
+        Member member = memberService.findByRefreshToken(refreshToken);
+        // 있으면 새로 발급
+        String accessToken = createAccessToken("All", member.getUserId());
+        
+        String filteredRefreshToken = refreshToken.replaceAll("\r","").replaceAll("\n",""); // 개행문자 제거??
+
+        // header에 토큰 셋팅
+        response.addHeader(TOKEN_ACCESS_KEY, accessToken);
+        response.addHeader(TOKEN_REFRESH_KEY, filteredRefreshToken);
+        response.addHeader(TOKEN_USER_ID, member.getUserId());
+        return accessToken;
+
+    }
 
     // dofilter에서 호출
+    // UsernamePasswordAuthenticationToken 정보를 셋팅할 때 호출됨.. 이라고함...
+    public Claims getClaimsFromToken(String token){
+        return Jwts.parser()
+                .setSigningKey(TOKEN_SECRET)
+                .parseClaimsJws(token)
+                .getBody();
+    }
 }

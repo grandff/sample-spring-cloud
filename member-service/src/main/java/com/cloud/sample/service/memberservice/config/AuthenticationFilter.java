@@ -8,8 +8,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.authentication.BadCredentialsException;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,13 +66,51 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         // 토큰 생성
         tokenProvider.createTokenAndAddHeader(request, response, chain, authResult);
         // 로그인 성공 후처리
-        memberService.loginCallback();
+        memberService.loginCallback(authResult.getName(), true, "");
     }
 
     // 로그인 실패 시 호출
+    @Transactional
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException{
+        String failContent = failed.getMessage();
+        if(failed instanceof InternalAuthenticationServiceException){
+            System.out.println("해당 사용자는 없습니다.");
+        }else if(failed instanceof BadCredentialsException){
+            failContent = "패스워드 인증에 실패했습니다. " + failContent;
+        }
+
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+
+        // 로그인 실패 후처리
+        String userId = (String) request.getAttribute("userId");
+        memberService.loginCallback(userId, false, failContent);
+        super.unsuccessfulAuthentication(request, response, failed);
+    }
 
     // 모든 요청시마다 호출
     // 토큰에 담긴 정보로 Authentication 정보 설정
     // 이처리를 하지 않으면 AnonymouseAuthenticationToken 으로 처리 됨
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain){
+        try {
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            String token = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);    // 토큰 확인?
+            if(!hasLength(token) || "undefined".equals(token)){
+                super.doFilter(request, response, chian);
+            }else{
+                // 토큰 유형 검사는 API Gateway ReactiveAuthorization 클래스에서 미리 처리
+                Claims claims = tokenProvider.getClaimsFromToken(token);
 
+                String username = claims.getSubject();
+
+                
+            }
+
+        }catch(CommonException e){
+
+        }catch(ServletException | IOException e){
+
+        }
+    }
 }
