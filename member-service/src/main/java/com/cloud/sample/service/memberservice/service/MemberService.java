@@ -95,7 +95,34 @@ public class MemberService implements UserDetailsService {
 
     // 로그인후처리
     @Transactional
-    public void loginCallback(){
-        
+    public void loginCallback(String userId, Boolean successAt, String failContent){
+        // 사용자 존재여부 확인
+        Member member = memberRepository.findByUserId(userId)
+                        .orElseThrow(() -> new CommonMessageException("해당 사용자가 존재하지 않습니다."));
+
+        if(Boolean.TRUE.equals(successAt)){
+            member.successLogin();
+        }else{
+            member.failLogin();
+        }
+
+        // 로그인로그입력처리? 필요시
     }
+
+    // 사용자 refresh token 입력
+    @Transactional
+    public void updateRefreshToken(String userId, String updateRefreshToken){
+        // 사용자 존재여부 확인
+        Member member = memberRepository.findByUserId(userId)
+                        .orElseThrow(() -> new CommonMessageException("해당 사용자가 존재하지 않습니다."));
+
+        member.updateRefreshToken(updateRefreshToken);        
+    }
+
+    // 토큰으로 사용자 조회
+    public Member findByRefreshToken(String refreshToken){
+        return memberRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new CommonMessageException("해당 사용자가 존재하지 않습니다."));
+    }
+    
 }

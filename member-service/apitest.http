@@ -33,5 +33,6 @@ POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/me
 Content-Type: application/json; charset=UTF-8
 
 {   
-    "userId" : "test"
+    "userId" : "test",
+    "password" : "cjswo123!"
 }

@@ -1,6 +1,7 @@
 package com.cloud.sample.service.memberservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
 
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.cloud.sample.service.memberservice.service.MemberService;
@@ -13,6 +14,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,12 +34,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.cloud.sample.service.memberservice.api.dto.MemberLoginRequestDto;
+import com.cloud.sample.service.memberservice.common.CommonException;
+
+import static org.springframework.util.StringUtils.hasLength;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     
     private final TokenProvider tokenProvider;
     private final MemberService memberService;
 
+    @Autowired
     public AuthenticationFilter(AuthenticationManager authenticationManager, TokenProvider tokenProvider, MemberService memberService) {
         super.setAuthenticationManager(authenticationManager);
         this.tokenProvider = tokenProvider;
@@ -62,7 +72,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     // 로그인 인증 성공 후 호출
     @Transactional
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chian, Authentication authResult) throws IOException, ServletException{
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException{
+        System.out.println("successfulAuthentication called!!");
         // 토큰 생성
         tokenProvider.createTokenAndAddHeader(request, response, chain, authResult);
         // 로그인 성공 후처리
@@ -73,6 +84,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Transactional
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException{
+        System.out.println("unsuccessfulAuthentication called!!");
         String failContent = failed.getMessage();
         if(failed instanceof InternalAuthenticationServiceException){
             System.out.println("해당 사용자는 없습니다.");
@@ -97,20 +109,31 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             String token = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);    // 토큰 확인?
             if(!hasLength(token) || "undefined".equals(token)){
-                super.doFilter(request, response, chian);
+                super.doFilter(request, response, chain);
             }else{
                 // 토큰 유형 검사는 API Gateway ReactiveAuthorization 클래스에서 미리 처리
                 Claims claims = tokenProvider.getClaimsFromToken(token);
 
                 String username = claims.getSubject();
 
-                
+                if(username == null){
+                    // refresh token에는 subject, authorities 정보가 없음
+                    SecurityContextHolder.getContext().setAuthentication(null);
+                }else{
+                    // 어차피 권한은 All 하나라서 그대로 써도 될듯..?
+                    List<SimpleGrantedAuthority> roleList = Arrays.stream(claims.get(tokenProvider.TOKEN_CLAIM_NAME, String.class).split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+                    SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(username, null, roleList));
+                }
+
+                chain.doFilter(request, response);
             }
 
         }catch(CommonException e){
-
+            SecurityContextHolder.getContext().setAuthentication(null);
         }catch(ServletException | IOException e){
-
+            SecurityContextHolder.getContext().setAuthentication(null);
         }
     }
 }

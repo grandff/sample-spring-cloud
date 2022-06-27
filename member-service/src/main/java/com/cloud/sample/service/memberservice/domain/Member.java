@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 //import com.cloud.sample.service.memberservice.domain.Role;
 
+import java.time.LocalDateTime;
 import javax.persistence.*;
 
 @Getter
@@ -20,7 +21,7 @@ import javax.persistence.*;
 @DynamicUpdate
 @Entity
 public class Member{
-    // 일련번호, 아이디, 비밀번호, 이름, 전화번호, 이메일, 상태코드, 새로운토큰정보, 로그인실패횟수
+    // 일련번호, 아이디, 비밀번호, 이름, 전화번호, 이메일, 상태코드, 새로운토큰정보, 로그인실패횟수, 로그인일자
 
     @Id @GeneratedValue
     @Column(name="user_no")
@@ -48,6 +49,9 @@ public class Member{
 
     @Column(nullable=false, columnDefinition="tinyint default '0'")
     private Integer loginFailCount;
+
+    @Column
+    private LocalDateTime lastLoginDate;
     
     //@Enumerated(EnumType.STRING)    // enum 값을 string 문자열로 저장
     //@Column(name="role_id", nullable = false)
@@ -63,4 +67,27 @@ public class Member{
         this.email = email;
         this.userStateCode = userStateCode;
     }
+
+    // 사용자 refresh token 정보 입력
+    public Member updateRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
+        return this;
+    }
+
+    // 로그인 실패 시 로그인 실패수 증가
+    public Member failLogin(){
+        this.loginFailCount = loginFailCount + 1;
+        if(this.loginFailCount >= 5){
+            this.userStateCode = MemberStateCode.HALT.getKey();   // ??
+        }
+        return this;
+    }
+
+    // 로그인 성공 시 로그인실패수와 마지막로그인일시 갱신
+    public Member successLogin(){
+        this.loginFailCount = 0;
+        this.lastLoginDate = LocalDateTime.now();
+        return this;
+    }
+
 }

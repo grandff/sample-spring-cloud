@@ -1,26 +1,34 @@
 package com.cloud.sample.service.memberservice.config;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
-import org.springframework.stereotype.Component;
-import com.cloud.sample.service.memberservice.service.MemberService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 
+import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import java.util.Date;
+import java.util.stream.Collectors;
 
 import com.cloud.sample.service.memberservice.domain.Member;
 import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
+import com.cloud.sample.service.memberservice.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class TokenProvider {
     private final MemberService memberService;
+    
+    @Autowired
+    public TokenProvider(MemberService memberService){
+        this.memberService = memberService;
+    }
+    
 
     @Value("${token.secret}")
     private String TOKEN_SECRET;    // secret key
@@ -38,6 +46,7 @@ public class TokenProvider {
 
     // 로그인 후 토큰을 생성하고 헤더에 정보를 담음
     public void createTokenAndAddHeader(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult){
+        System.out.println("createTokenAndAddHeader called!!");
         // 로그인 성공 후 토큰 처리
         String userId = authResult.getName();
         String authorities = "All"; // 권한 설정한게 없으니까 service에서 맞춘 권한과 동일하게 처리
@@ -57,6 +66,7 @@ public class TokenProvider {
 
     // jwt access token 생성
     private String createAccessToken(String authorities, String userId){
+        System.out.println("createAccessToken called!!");
         return Jwts.builder()
                 .setSubject(userId)
                 .claim(TOKEN_CLAIM_NAME, authorities)

@@ -13,3 +13,6 @@
 # gradle build
 ### gralde build and run <https://gihyun.com/120>
 ### gradle permession error <https://javalism.tistory.com/101>
+### gradle offline <https://forgiveall.tistory.com/611>
+- gradle --gradle-user-home /workspaces/sample-spring-cloud/gradle/.gradle  // 생기긴 생기는데
+- gradle clean bootRun -g /workspaces/sample-spring-cloud/gradle/.gradle --offline  // 안됨..?
