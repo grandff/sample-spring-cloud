@@ -1,20 +1,18 @@
 package com.cloud.sample.service.userservice.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
-import com.cloud.sample.service.userservice.domain.UserRepository;
-import com.cloud.sample.service.userservice.api.dto.UserResponseData;
+import com.cloud.sample.service.userservice.api.dto.DeliveryRequestData;
 import com.cloud.sample.service.userservice.api.dto.TeamResponseData;
 import com.cloud.sample.service.userservice.api.dto.UserCreateData;
-import com.cloud.sample.service.userservice.domain.User;
+import com.cloud.sample.service.userservice.api.dto.UserResponseData;
+import com.cloud.sample.service.userservice.client.OrderServiceClient;
 import com.cloud.sample.service.userservice.client.TeamServiceClient;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpMethod;
+import com.cloud.sample.service.userservice.domain.User;
+import com.cloud.sample.service.userservice.domain.UserRepository;
 
 // 비지니스 로직 담당
 @Service
@@ -24,12 +22,14 @@ public class UserService{
     private final UserRepository userRepository;
     private final RestTemplate restTemplate;    // resttemplate 의존성 추가
     private final TeamServiceClient teamServiceClient;
+    private final OrderServiceClient orderServiceClient;
 
     @Autowired
-    public UserService(UserRepository userRepository, RestTemplate restTemplate, TeamServiceClient teamServiceClient){
+    public UserService(UserRepository userRepository, RestTemplate restTemplate, TeamServiceClient teamServiceClient, OrderServiceClient orderServiceClient){
         this.userRepository = userRepository;
         this.restTemplate = restTemplate;
         this.teamServiceClient = teamServiceClient;
+        this.orderServiceClient = orderServiceClient;
     }
 
     /*
@@ -80,5 +80,12 @@ public class UserService{
             .username(userOptional.getUsername())
             .team(team) // from team-service로부터 조회한 team 정보를 담아서 반환
             .build();
+      }
+      
+      // order service 호출
+      public String getOrderRequest(String userId, String address) {
+    	  DeliveryRequestData orderData = orderServiceClient.requestDelivery(userId, address);
+    	  
+    	  return "";
       }
 }

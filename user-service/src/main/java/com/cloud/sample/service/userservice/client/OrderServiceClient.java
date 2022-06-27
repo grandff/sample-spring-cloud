@@ -9,6 +9,6 @@ import com.cloud.sample.service.userservice.api.dto.DeliveryRequestData;
 @FeignClient(name="order-service")
 public interface OrderServiceClient {
     // 사용자가 주문을 넣음
-    @GetMapping("/order/request/{userId}/{address}")
+    @GetMapping("/order/request/{userId}/{address}")	
     DeliveryRequestData requestDelivery(@PathVariable("userId") String userId, @PathVariable("address") String address);
 }
