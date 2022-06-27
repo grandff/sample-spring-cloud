@@ -14,3 +14,7 @@
 1. docker run -d -e TZ=Asia/Seoul --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
 2. 15672 포트로 접속
 3. guest, guest 로그인
+
+## zipkin
+1. docker run --name zipkin -d -p 9411:9411 -e TZ=Asia/Seoul openzipkin/zipkin
+2. 9411 포트로 접속

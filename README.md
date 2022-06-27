@@ -18,12 +18,16 @@
 ### user-service : user micro service practice code
 
 ## 설명
-- sample-service : 기본템플릿
+- sample-service : 기본템플릿(gradle)
+- sample-service-maven : 기본템플릿(maven)
 - user-service : 회원관리(연습코드)
 - team-service : 팀관리(연습코드)
     > user-service와 team-service는 OpenFeign, Rest Tempalte를 비교하기 위한 연습코드
+- order-service : 주문관리(연습코드)
+    > order-service는 분산 추적 실습을 위한 연습코드
 - member-service : 회원관리(개발중 ... )
-    > 로그인, 회원가입, SNS 로그인
+    > 로그인, 회원가입, SNS 로그인, 회원수정, 토큰재발급, 회원탈퇴
+
 
 ## 참고한 사이트
 [eureka discovery server](https://wonit.tistory.com/495?category=854728)<br/>
