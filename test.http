@@ -9,7 +9,7 @@ GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/use
 ###
 
 // ping
-GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/ping
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/sample-maven/ping
 
 ###
 

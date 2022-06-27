@@ -1,0 +1,28 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service    
+  profiles:
+    active: native, default
+  cloud:
+    config:
+      server:
+        native:
+         search-locations: file:./config  # local folder
+         #search-locations: file:///${user.home}/workspace/cloud-sample-config # Windows
+#      search-locations: file://${user.home}/workspace/cloud-sample-config # MacOS, linux
+
+  rabbitmq:
+    host: ${rabbitmq.hostname:localhost}
+    port: 5672
+    username: guest
+    password: guest
+
+# config server actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, beans, refresh, busrefresh

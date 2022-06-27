@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ConfigServerApplication",
+            "request": "launch",
+            "mainClass": "com.cloud.sample.configserver.ConfigServerApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Launch UserServiceApplication",
+            "request": "launch",
+            "mainClass": "com.cloud.sample.service.userservice.UserServiceApplication",
+            "projectName": "user-service"
+        },
+        {
+            "type": "java",
+            "name": "Launch DiscoveryServerApplication",
+            "request": "launch",
+            "mainClass": "com.cloud.sample.discoveryserver.DiscoveryServerApplication",
+            "projectName": "discovery-server"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-DiscoveryServerApplication<discovery>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
@@ -47,6 +68,16 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.msa.user.UserServiceApplication",
             "projectName": "user",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SampleServiceMavenApplication<sample-service-maven>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cloud.sample.sampleservicemaven.SampleServiceMavenApplication",
+            "projectName": "sample-service-maven",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
