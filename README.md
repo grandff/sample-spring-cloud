@@ -15,9 +15,11 @@
     - config 설정은 로컬에 저장
 ### gateway : spring cloud gateway server
 ### sample-service : micro service sample template(gradle)
-###
+### sample-service-maven : micro service sample template(maven)
 ### user-service : user micro service practice code
-###
+### team-service : team micro service practice code
+### order-service : order micro service practice code for zipkin
+### delivery-service : delivery micro service practice code for zipkin
 
 ## 설명
 - sample-service : 기본템플릿(gradle)
