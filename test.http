@@ -43,3 +43,13 @@ GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/tea
 
 // member ping
 GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/ping
+
+###
+
+// user ping
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/ping
+
+###
+
+// order ping
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/order/ping

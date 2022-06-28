@@ -58,6 +58,10 @@ dependencies {
 	
     implementation 'mysql:mysql-connector-java'	// mysql(dev only)
     implementation 'io.jsonwebtoken:jjwt:0.9.1'	// jwt
+
+    // sleuth, zipkin
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
 }
 
 dependencyManagement {

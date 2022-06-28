@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import com.cloud.sample.service.userservice.api.dto.DeliveryRequestData;
+import com.cloud.sample.service.userservice.api.dto.DeliveryResponseData;
 import com.cloud.sample.service.userservice.api.dto.TeamResponseData;
 import com.cloud.sample.service.userservice.api.dto.UserCreateData;
 import com.cloud.sample.service.userservice.api.dto.UserResponseData;
@@ -83,9 +83,8 @@ public class UserService{
       }
       
       // order service 호출
-      public String getOrderRequest(String userId, String address) {
-    	  DeliveryRequestData orderData = orderServiceClient.requestDelivery(userId, address);
-    	  
-    	  return "";
+      public DeliveryResponseData getOrderRequest(String userId, String address) {
+    	  DeliveryResponseData orderData = orderServiceClient.requestDelivery(userId, address);    	  
+    	  return orderData;
       }
 }
