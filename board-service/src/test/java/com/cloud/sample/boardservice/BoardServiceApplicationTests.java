@@ -1,10 +1,10 @@
-package com.cloud.sample.sampleservicemaven;
+package com.cloud.sample.boardservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SampleServiceMavenApplicationTests {
+class BoardServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
