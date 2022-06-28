@@ -1,6 +1,6 @@
 # sample-spring-cloud
 ### spring cloud sample 프로젝트
-### Gradle 7.4.2 / Spring Boot 2.4.5 / Spring CLoud 2020.0.3 / OpenJDK 11
+### Maven / Spring Boot 2.4.5 / Spring Cloud 2020.0.3 / OpenJDK 11
 
 ## 용어 설명
 ### Configuration Server : 시스템의 환경 설정을 중앙화하고 실시간으로 설정을 변경하고 전파하는 기능을 제공
@@ -14,8 +14,10 @@
 ### config : spring cloud config server
     - config 설정은 로컬에 저장
 ### gateway : spring cloud gateway server
-### sample-service : micro service sample template
+### sample-service : micro service sample template(gradle)
+###
 ### user-service : user micro service practice code
+###
 
 ## 설명
 - sample-service : 기본템플릿(gradle)
@@ -24,7 +26,10 @@
 - team-service : 팀관리(연습코드)
     > user-service와 team-service는 OpenFeign, Rest Tempalte를 비교하기 위한 연습코드
 - order-service : 주문관리(연습코드)
-    > order-service는 분산 추적 실습을 위한 연습코드
+- delivery-service : 배달관리(연습코드)
+    > order-service, delivery-service는 분산 추적 실습을 위한 연습코드
+    > user-service와 같이 켜서 테스트 해야함!
+    > codespace에서는 오류나서 로컬에서 테스트해야함
 - member-service : 회원관리(개발중 ... )
     > 로그인, 회원가입, SNS 로그인, 회원수정, 토큰재발급, 회원탈퇴
 

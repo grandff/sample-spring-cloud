@@ -53,3 +53,14 @@ GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/use
 
 // order ping
 GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/order/ping
+
+###
+
+// delivery ping
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/delivery/ping
+
+
+###
+
+// user - order- delivery zipkin test
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/getorder/test/korea

@@ -1,4 +1,4 @@
-package com.cloud.sample.orderservice.config;
+package com.cloud.sample.deliveryservice.config;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

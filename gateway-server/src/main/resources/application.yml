@@ -19,7 +19,14 @@ spring:
           predicates:
             - Path=/user/**
           filters:
-            - RewritePath=/user/(?<segment>.*), /$\{segment}           
+            - RewritePath=/user/(?<segment>.*), /$\{segment}      
+            
+        - id: delivery-service
+          uri: lb://DELIVERY-SERVICE
+          predicates:
+            - Path=/delivery/**
+          filters:
+            - RewritePath=/delivery/(?<segment>.*), /$\{segment}   
         
         - id: team-service
           uri: lb://TEAM-SERVICE

@@ -1,4 +1,4 @@
-package com.cloud.sample.orderservice;
+package com.cloud.sample.deliveryservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,17 +8,17 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RestController;
 
-@ComponentScan(basePackages = {"com.cloud.sample.orderservice"})
-@EntityScan({"com.cloud.sample.orderservice.domain"})
+@ComponentScan(basePackages = {"com.cloud.sample.deliveryservice"})
+@EntityScan({"com.cloud.sample.deliveryservice.domain"})
 //@EnableJpaRepositories(basePackages = {"com.cloud.sample.service.sampleservice"})
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {"com.cloud.sample.orderservice.client"})
+@EnableFeignClients(basePackages = {"com.cloud.sample.deliveryservice.client"})
 @RestController
-public class OrderServiceApplication {
+public class DeliveryServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderServiceApplication.class, args);
+		SpringApplication.run(DeliveryServiceApplication.class, args);
 	}
 
 }

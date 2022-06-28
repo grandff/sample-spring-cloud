@@ -1,25 +1,38 @@
-package com.cloud.sample.orderservice.service;
+package com.cloud.sample.deliveryservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cloud.sample.orderservice.api.dto.DeliveryResponseData;
-import com.cloud.sample.orderservice.client.DeliveryServiceClient;
+import com.cloud.sample.deliveryservice.api.dto.DeliveryResponseData;
+import com.cloud.sample.deliveryservice.domain.DeliveryRepository;
+import com.cloud.sample.deliveryservice.domain.Delivery;
 
 @Service
 @Transactional
-public class OrderService {
-    private final DeliveryServiceClient deliveryServiceClient;
+public class DeliveryService {
+    private final DeliveryRepository deliveryRepository;
 
     @Autowired
-    public OrderService(DeliveryServiceClient deliveryServiceClient){
-        this.deliveryServiceClient = deliveryServiceClient;
+    public DeliveryService(DeliveryRepository deliveryRepository){
+        this.deliveryRepository = deliveryRepository;
     }
 
-    // request-service 호출
-    public DeliveryResponseData getDeliveryRequest(String userId, String address){
-        DeliveryResponseData deliveryData = deliveryServiceClient.requestDelivery(userId, address);
-        return deliveryData;
+    // reseponse data create
+    public DeliveryResponseData save(String userId, String address){
+        // 데이터 저장
+        Delivery delivery = Delivery.builder()
+            .orderNum("1111122222")
+            .userId(userId)
+            .address(address)
+            .build();
+        delivery = deliveryRepository.save(delivery);
+
+        // 임의로 접수번호를 만들어서 리턴
+        return DeliveryResponseData.builder()
+            .orderNum(delivery.getOrderNum())
+            .userId(delivery.getUserId())
+            .address(delivery.getAddress())
+            .build();
     }
 }
