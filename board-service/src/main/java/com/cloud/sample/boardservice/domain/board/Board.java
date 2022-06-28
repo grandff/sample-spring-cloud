@@ -1,8 +1,24 @@
 package com.cloud.sample.boardservice.domain.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.cloud.sample.boardservice.domain.posts.Posts;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
 
 @Getter
 @NoArgsConstructor
@@ -23,14 +39,25 @@ public class Board{
     private Integer postDiplayCount;
 
     // 페이지 표시 수
-    // 신규 표시 일 수
-    // 에디터 사용 여부
-    // 사용자 작성 여부
-    // 댓글 사용 여부
+    @Column(nullable = false, columnDefinition = "mediumint(5) default '10'")
+    private Integer pageDisplayCount;    
+    
     // 업로드 사용 여부
-    // 업로드 제한 수
-    // 업로드 제한 크기
+    @Column(nullable = false, columnDefinition = "tinyint(1) default '0'")
+    private Boolean uploadUseAt;
+    
     // 게시물 엔티티
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+    @OnDelete(action=OnDeleteAction.CASCADE)
+    private List<Posts> posts = new ArrayList<>();
 
     // 빌더 패턴
+    @Builder
+    public Board(Integer boardNo, String boardName, Integer postDisplayCount, Integer pageDisplayCount, Boolean uploadUseAt) {
+    	this.boardNo = boardNo;
+    	this.boardName = boardName;
+    	this.postDiplayCount = postDisplayCount;
+    	this.pageDisplayCount = pageDisplayCount;
+    	this.uploadUseAt = uploadUseAt;
+    }
 }
