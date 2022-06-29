@@ -64,3 +64,21 @@ GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/del
 
 // user - order- delivery zipkin test
 GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/user/getorder/test/korea
+
+
+###
+
+// board - post check
+//access-token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJBbGwiLCJleHAiOjE2NTY0Nzk5MzJ9.Suxa8ct-zHNX8qVQpwU75s_H8DxwzejtJFhuQ27oFgqhK_b5boMgNJ2KnWmmEmO39wsl4zSB8FqSOCo_7WYZ0A
+
+
+###
+
+// board - insert
+POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/board/api/post/insert
+Content-Type: application/json; charset=UTF-8
+
+{   
+    "title" : "제목입니다",
+    "ctt" : "내용입니다."
+}

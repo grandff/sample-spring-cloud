@@ -47,7 +47,14 @@ spring:
           predicates:
             - Path=/member/**
           filters:
-            - RewritePath=/member/(?<segment>.*), /$\{segment}            
+            - RewritePath=/member/(?<segment>.*), /$\{segment}    
+        
+        - id: board-service
+          uri: lb://BOARD-SERVICE
+          predicates:
+            - Path=/board/**
+          filters:
+            - RewritePath=/board/(?<segment>.*), /$\{segment}           
 
         - id: sample-maven
           uri: lb://SAMPLE-MAVEN  # 포워딩 주소. 로드밸런싱 처리

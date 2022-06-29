@@ -1,12 +1,9 @@
 package com.cloud.sample.service.memberservice.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 import java.util.Arrays;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor

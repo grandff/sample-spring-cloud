@@ -1,32 +1,28 @@
 package com.cloud.sample.service.memberservice.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import com.cloud.sample.service.memberservice.api.dto.MemberJoinRequestDto;
-import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
-import com.cloud.sample.service.memberservice.domain.MemberRepository;
-import com.cloud.sample.service.memberservice.domain.Member;
-
-import com.cloud.sample.service.memberservice.common.CommonException;
-import com.cloud.sample.service.memberservice.common.CommonMessageException;
-import com.cloud.sample.service.memberservice.common.dto.ErrorCode;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.ArrayList;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.cloud.sample.service.memberservice.api.dto.MemberJoinRequestDto;
+import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
+import com.cloud.sample.service.memberservice.common.CommonMessageException;
+import com.cloud.sample.service.memberservice.domain.Member;
+import com.cloud.sample.service.memberservice.domain.MemberRepository;
+
+import lombok.RequiredArgsConstructor;
 
 // 비지니스 로직 담당
 @Service
