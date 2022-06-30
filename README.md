@@ -22,6 +22,13 @@
 ### order-service : order micro service practice code for zipkin
 ### delivery-service : delivery micro service practice code for zipkin
 
+## 프로젝트 실행 순서
+1. zipkin, rabbitmq, mysql(or oracle) on
+2. discovery-server(java -jar target/discovery-server-0.0.1.jar)
+3. config-server(java -jar target/config-server-0.0.1.jar)
+4. gateway-server(java -jar target/gateway-server-0.0.1.jar)
+5. 그 외 micro service 실행
+
 ## 설명
 - sample-service : 기본템플릿(gradle)
 - sample-service-maven : 기본템플릿(maven)
@@ -32,7 +39,7 @@
 - delivery-service : 배달관리(연습코드)
     > order-service, delivery-service는 분산 추적 실습을 위한 연습코드
     > user-service와 같이 켜서 테스트 해야함!
-    > codespace에서는 오류나서 로컬에서 테스트해야함
+    > codespace에서는 코어 제한으로 도커 오류가 나서 로컬에서만 테스트 가능
 - member-service : 회원관리(개발중 ... )
     > 로그인, 회원가입, SNS 로그인, 회원수정, 토큰재발급, 회원탈퇴
 - board-service : 게시판 CRUD(개발중 ... )

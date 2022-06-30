@@ -4,7 +4,7 @@ CREATE TABLE POSTS(
   title VARCHAR(20) NOT NULL,                      
   ctt TEXT,                                   
   filename VARCHAR(20) ,                       
-  useYn VARCHAR(20) DEFAULT 'Y',                      
+  useYn VARCHAR(1) DEFAULT 'Y',                      
   url VARCHAR(20) ,                      
   size INT(20) ,                      
   regDate  DATETIME,                                     

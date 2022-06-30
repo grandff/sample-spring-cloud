@@ -13,7 +13,7 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 @EnableWebFluxSecurity  // spring security 설정 활성화
 public class WebFluxSecurityConfig {
     private final static String[] PERMITALL_ANTPATTERNS = {
-        ReactiveAuthorization.AUTHORIZATION_URI, "/", "/csrf", "/member/login", "/?*/actuator/?*", "/actuator/?*", "**/configuration/*", "/swagger*/**"
+        ReactiveAuthorization.AUTHORIZATION_URI, "/", "/csrf", "/member/login", "/?*/actuator/?*", "/actuator/?*", "**/configuration/*", "/swagger*/**", "/board/api/post/view/?*", "/board/api/post/list"
     };  // 인증없이 호출 가능한 url패턴
 
     private final static String USER_JOIN_ANTPATTERNS = "/member/api/join"; // 가입 url

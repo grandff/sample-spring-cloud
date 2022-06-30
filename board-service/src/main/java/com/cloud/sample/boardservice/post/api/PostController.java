@@ -1,7 +1,11 @@
 package com.cloud.sample.boardservice.post.api;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,11 +21,23 @@ public class PostController {
         this.postService = postService;        
     }
 
+    // 게시글 등록
     @PostMapping(value="/api/post/insert")
     @ResponseStatus(HttpStatus.CREATED)
     public Post postInsert(@RequestBody Post post){
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("userId :: " + userId);
         return postService.insert(post, userId);
+    }
+
+    // 게시글 단건 조회
+    @GetMapping(value="/api/post/view/{postId}")
+    public List<Post> postView(@PathVariable Long postId){
+        return postService.view(postId);
+    }
+
+    // 게시글 전체 조회
+    @GetMapping(value="/api/post/list")
+    public List<Post> postList(){
+        return postService.list();
     }
 }

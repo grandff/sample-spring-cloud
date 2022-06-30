@@ -1,5 +1,8 @@
 package com.cloud.sample.boardservice.post.repository;
 
+import java.util.List;
+
+import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -15,9 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PostRepository {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;    // spring jdbc
+    private final PostRowMapper rowMapper;
 
-    public PostRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
+    public PostRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate, PostRowMapper rowMapper){
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.rowMapper = rowMapper;
     }
 
     // insert
@@ -35,5 +40,17 @@ public class PostRepository {
         post.setId(keyHolder.getKey().intValue());
         post.setUserId(userId);
         return post;
+    }
+
+    // detail select
+    public List<Post> detail(Long id){  // query는 list로 리턴해줌
+        String query = PostSql.SELECT + PostSql.ID_CONDITION;
+        SqlParameterSource param = new MapSqlParameterSource("id", id);        
+        return namedParameterJdbcTemplate.query(query, param, this.rowMapper);
+    }
+
+    // total list
+    public List<Post> list(){
+        return namedParameterJdbcTemplate.query(PostSql.SELECT, EmptySqlParameterSource.INSTANCE, this.rowMapper);
     }
 }

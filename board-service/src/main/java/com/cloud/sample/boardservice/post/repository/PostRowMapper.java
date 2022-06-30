@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.cloud.sample.boardservice.post.model.Post;
 
+@Component
 public class PostRowMapper implements RowMapper<Post>{
     @Override
     public Post mapRow(ResultSet rs, int rowNum) throws SQLException{

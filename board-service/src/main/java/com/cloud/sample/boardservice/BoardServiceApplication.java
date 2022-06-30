@@ -6,7 +6,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = {"com.cloud.sample.boardservice"})
-//@EntityScan({"com.cloud.sample.service.sampleservice.domain"})
 @SpringBootApplication
 @EnableDiscoveryClient
 //@EnableFeignClients(basePackages = {"com.cloud.sample.service.sampleservice.client"})
