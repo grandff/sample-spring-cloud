@@ -21,7 +21,7 @@ public class PostRepository {
     }
 
     // insert
-    public Post insert(Post post, String userId){
+    public Post insert(Post post, String userId){        
         KeyHolder keyHolder = new GeneratedKeyHolder(); // id 자동 생성
         SqlParameterSource parameterSource = new MapSqlParameterSource("userId", userId)
         .addValue("title", post.getTitle())
@@ -33,6 +33,7 @@ public class PostRepository {
         
         namedParameterJdbcTemplate.update(PostSql.INSERT, parameterSource, keyHolder);
         post.setId(keyHolder.getKey().intValue());
+        post.setUserId(userId);
         return post;
     }
 }

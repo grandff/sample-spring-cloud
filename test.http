@@ -75,6 +75,19 @@ GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/use
 ###
 
 // board - insert
+// AUTHORIZATION에 로그인 후 리턴 받은 토큰을 넣어야함 
+POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/board/api/post/insert
+Content-Type: application/json; charset=UTF-8
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJBbGwiLCJleHAiOjE2NTY1NTc0ODF9.TSvXYiuoCBbYF1s2q5rBJhoLb0JQe2ujKJ6tWdwtmsf3Yf4Az6_ssmPzOgH-m0J8qxcCPGDl8Fi8nGk3RqwP2Q
+
+{   
+    "title" : "제목입니다",
+    "ctt" : "내용입니다."
+}
+
+###
+
+// board - insert authorization test
 POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/board/api/post/insert
 Content-Type: application/json; charset=UTF-8
 

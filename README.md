@@ -14,6 +14,7 @@
 ### config : spring cloud config server
     - config 설정은 로컬에 저장
 ### gateway : spring cloud gateway server
+### module-common : msa common module(개발해야함...)
 ### sample-service : micro service sample template(gradle)
 ### sample-service-maven : micro service sample template(maven)
 ### user-service : user micro service practice code
@@ -34,6 +35,8 @@
     > codespace에서는 오류나서 로컬에서 테스트해야함
 - member-service : 회원관리(개발중 ... )
     > 로그인, 회원가입, SNS 로그인, 회원수정, 토큰재발급, 회원탈퇴
+- board-service : 게시판 CRUD(개발중 ... )
+    > 등록, 수정, 삭제, 조회, 파일업로드, 파일다운로드
 
 
 ## 참고한 사이트

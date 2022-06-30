@@ -1,24 +1,23 @@
 package com.cloud.sample.service.memberservice.config;
 
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Component;
+import java.util.Date;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 import com.cloud.sample.service.memberservice.domain.Member;
-import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
 import com.cloud.sample.service.memberservice.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class TokenProvider {
@@ -66,7 +65,8 @@ public class TokenProvider {
 
     // jwt access token 생성
     private String createAccessToken(String authorities, String userId){
-        System.out.println("createAccessToken called!!");
+        System.out.println("createAccessToken called!!" );
+        System.out.println("secretkey is " + TOKEN_SECRET);
         return Jwts.builder()
                 .setSubject(userId)
                 .claim(TOKEN_CLAIM_NAME, authorities)
@@ -103,6 +103,7 @@ public class TokenProvider {
     // dofilter에서 호출
     // UsernamePasswordAuthenticationToken 정보를 셋팅할 때 호출됨.. 이라고함...
     public Claims getClaimsFromToken(String token){
+        System.out.println("getClaimsFromToken called!! " + token);
         return Jwts.parser()
                 .setSigningKey(TOKEN_SECRET)
                 .parseClaimsJws(token)

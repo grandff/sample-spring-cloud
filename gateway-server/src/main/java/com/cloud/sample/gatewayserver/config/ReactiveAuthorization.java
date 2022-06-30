@@ -54,12 +54,14 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
         if(authorizations != null && authorizations.size() > 0 && StringUtils.hasLength(authorizations.get(0)) && !"undefined".equals(authorizations.get(0))){
             try{
                 authorizationHeader = authorizations.get(0);    // ???
+                System.out.println("auth header :: " + authorizationHeader);
                 String jwt = authorizationHeader.replace("Bearer", ""); // ???
                 String subject = Jwts.parser().setSigningKey(TOKEN_SECRET)
                     .parseClaimsJws(jwt)
                     .getBody()
                     .getSubject();  // ???
-                
+                System.out.println("token ???? " + subject);
+
                 // 요청 path가 refresh token인 경우 토큰 검증만 하고 인가처리
                 if(REFRESH_TOKEN_URI.equals(requestPath + "")){
                     return Mono.just(new AuthorizationDecision(true));
@@ -81,6 +83,8 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
                 System.out.println("토큰 인증 오류 exception : " + e.getMessage());
                 throw new AuthorizationServiceException("토큰 인증 오류");
             }
+        }else{  // 토큰이 없으면 접근 불가 처리
+            throw new AuthorizationServiceException("토큰 없음");
         }
 
         /* !!! 별도 권한에 따라 접근 제어를 하지 않을것이므로 일단 여긴 주석처리.. 토큰 유효성만 체크 중!!!!!
