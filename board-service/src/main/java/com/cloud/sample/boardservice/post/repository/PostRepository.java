@@ -53,4 +53,13 @@ public class PostRepository {
     public List<Post> list(){
         return namedParameterJdbcTemplate.query(PostSql.SELECT, EmptySqlParameterSource.INSTANCE, this.rowMapper);
     }
+
+    // update
+    public Integer update(Post post, String userId){           
+        String query = PostSql.UPDATE;
+        SqlParameterSource param = new MapSqlParameterSource("id", post.getId())
+        .addValue("title", post.getTitle())
+        .addValue("ctt", post.getCtt());
+        return namedParameterJdbcTemplate.update(query, param);
+    }
 }
