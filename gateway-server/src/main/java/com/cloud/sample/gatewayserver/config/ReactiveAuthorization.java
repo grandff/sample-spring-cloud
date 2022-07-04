@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -33,7 +34,6 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
     public static final String AUTHORIZATION_URI = "/member/api/authorization/check"; // 인증 URI 
     public static final String REFRESH_TOKEN_URI = "/member/api/token/refresh"; // 토큰재발급 URI
 
-    String authorizationHeader = "";
 
     // 요청에 대한 사용자 권한여부를 체크해서 true, false를 리턴
     // 헤더에 토큰이 있으면 유효성 체크
@@ -49,6 +49,9 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
 
         // 토큰에 저장되어있는 authorization 추출 ?? 대체 httpheaders의 authorizaiton 이 먼디요..
         List<String> authorizations = request.getHeaders().containsKey(org.springframework.http.HttpHeaders.AUTHORIZATION) ? request.getHeaders().get(org.springframework.http.HttpHeaders.AUTHORIZATION) : null;
+        
+        
+        String authorizationHeader = "";
 
         // 아무튼 헤더안에 데이터가 있을 경우에만 확인
         if(authorizations != null && authorizations.size() > 0 && StringUtils.hasLength(authorizations.get(0)) && !"undefined".equals(authorizations.get(0))){
@@ -87,7 +90,9 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
             throw new AuthorizationServiceException("토큰 없음");
         }
 
-        /* !!! 별도 권한에 따라 접근 제어를 하지 않을것이므로 일단 여긴 주석처리.. 토큰 유효성만 체크 중!!!!!
+        
+        // 권한 확인
+        System.out.println("권한 확인 시작!!")
         boolean granted = false;
         try{
             String token = authorizationHeader; // 위에서 추출한 토큰값....???
@@ -107,9 +112,6 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
             throw new AuthorizationServiceException("인가 요청 오류 발생");
         }
         System.out.println("--------check 요청 종료 ---------------");
-        return Mono.just(new AuthorizationDecision(granted));
-        */
-
-        return Mono.just(new AuthorizationDecision(true));
+        return Mono.just(new AuthorizationDecision(granted));                
     }
 }

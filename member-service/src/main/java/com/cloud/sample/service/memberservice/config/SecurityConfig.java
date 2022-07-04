@@ -42,8 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.anyRequest().access("@authorizationService.isAuthorization(request, authentication)") // 호출 시 권한 인가 데이터 확인 이거 대체 어떻게 데이터 불러옴??
             .and()
                 .addFilter(getAuthenticationFilter())   // 로그인 처리를 위해 커스텀 필터 등록
-                .logout()   // 기본값은 /logout
-                .logoutSuccessUrl("/");
+                .logout()                       
+                    .clearAuthentication(true)       
+                .logoutSuccessUrl("/");                    
+                    //.deleteCookies("JSESSIONID", "AUTHORIZATION", "TOKEN_ACCESS_KEY", "TOKEN_REFRESH_KEY", "TOKEN_USER_ID");
     }
 
     // 로그인 인증 정보를 받아 토큰을 발급할 수 있도록 필터 등록

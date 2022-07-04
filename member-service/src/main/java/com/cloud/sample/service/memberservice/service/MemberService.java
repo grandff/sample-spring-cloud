@@ -82,7 +82,8 @@ public class MemberService implements UserDetailsService {
         
         // 권한 설정
         ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("All")); // 별도 권한 설정한게 없으면 아무거나 넣어주거나 아예 empty list 를 줘야함. 빈 string 넣으면 error 
+        String roleId = member.getRole();
+        authorities.add(new SimpleGrantedAuthority(roleId)); // 별도 권한 설정한게 없으면 아무거나 넣어주거나 아예 empty list 를 줘야함. 빈 string 넣으면 error 
 
         // 사용자 리턴
         return new User(member.getUserId(), member.getPassword(), authorities);

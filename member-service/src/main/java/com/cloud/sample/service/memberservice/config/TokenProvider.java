@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
 import com.cloud.sample.service.memberservice.domain.Member;
 import com.cloud.sample.service.memberservice.service.MemberService;
 
@@ -48,7 +49,10 @@ public class TokenProvider {
         System.out.println("createTokenAndAddHeader called!!");
         // 로그인 성공 후 토큰 처리
         String userId = authResult.getName();
-        String authorities = "All"; // 권한 설정한게 없으니까 service에서 맞춘 권한과 동일하게 처리
+        
+        // 권한설정 아이디로 일단 찾고나서 권한정보 가져오기
+        MemberResponseDto member = memberService.findByUserId(userId);
+        String authorities = member.getRole(); // 권한 설정한게 없으니까 service에서 맞춘 권한과 동일하게 처리
 
         // jwt access 토큰 생성
         String accessToken = createAccessToken(authorities, userId);

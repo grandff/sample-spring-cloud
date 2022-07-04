@@ -65,4 +65,5 @@ public class MemberController{
         String refreshToken = request.getHeader(HttpHeaders.AUTHORIZATION);
         tokenProvider.refreshToken(refreshToken, response);
     }
+
 }

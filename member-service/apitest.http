@@ -18,13 +18,15 @@ Content-Type: application/json; charset=UTF-8
     "userName" : "테스트",
     "password" : "cjswo123!",
     "tel" : "010-1111-2222",
-    "email" : "dev@dev"
+    "email" : "dev@dev",
+    "role" : "01"
 }
 
 ###
 
 // 회원조회
 GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/api/detail/test
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NjkyNjEwMX0.ak8NRqM-TfKMUGEbRrMVCs1NiSPCUgG1dbhgbsyLP8c9f4lif4CnaaG0L8TdWHGfY7vXa5V9OI0zMLK-S48Lew
 
 ###
 
@@ -36,3 +38,9 @@ Content-Type: application/json; charset=UTF-8
     "userId" : "test",
     "password" : "cjswo123!"
 }
+
+###
+
+// 로그아웃 제대로 되는거 맞음?????
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/lgout
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NjkyNjEwMX0.ak8NRqM-TfKMUGEbRrMVCs1NiSPCUgG1dbhgbsyLP8c9f4lif4CnaaG0L8TdWHGfY7vXa5V9OI0zMLK-S48Lew
