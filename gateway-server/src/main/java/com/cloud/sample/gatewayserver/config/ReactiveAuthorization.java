@@ -92,7 +92,7 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
 
         
         // 권한 확인
-        System.out.println("권한 확인 시작!!")
+        System.out.println("권한 확인 시작!!");
         boolean granted = false;
         try{
             String token = authorizationHeader; // 위에서 추출한 토큰값....???
