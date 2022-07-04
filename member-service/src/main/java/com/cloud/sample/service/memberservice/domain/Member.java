@@ -57,6 +57,9 @@ public class Member{
 
     @Column
     private LocalDateTime lastLoginDate;
+
+    @Column(nullable = false)
+    private String role;
     
     //@Enumerated(EnumType.STRING)    // enum 값을 string 문자열로 저장
     //@Column(name="role_id", nullable = false)
@@ -64,13 +67,14 @@ public class Member{
 
     
     @Builder
-    public Member(String userId, String password, String userName, String tel, String email, String userStateCode){
+    public Member(String userId, String password, String userName, String tel, String email, String userStateCode, String role){
         this.userId = userId;
         this.password = password;
         this.userName = userName;
         this.tel = tel;
         this.email = email;
         this.userStateCode = userStateCode;
+        this.role = role;
     }
 
     // 사용자 refresh token 정보 입력

@@ -1,6 +1,5 @@
 package com.cloud.sample.service.memberservice.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,6 +8,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.cloud.sample.service.memberservice.service.MemberService;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @EnableWebSecurity // Spring Security 설정들을 활성화시켜 준다
@@ -40,9 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(PERMITALL_PATTERNS).permitAll()
                 //.anyRequest().access("@authorizationService.isAuthorization(request, authentication)") // 호출 시 권한 인가 데이터 확인 이거 대체 어떻게 데이터 불러옴??
             .and()
-                .addFilter(getAuthenticationFilter());   // 로그인 처리를 위해 커스텀 필터 등록
-                //.logout()
-                //.logoutSuccessUrl("/");
+                .addFilter(getAuthenticationFilter())   // 로그인 처리를 위해 커스텀 필터 등록
+                .logout()   // 기본값은 /logout
+                .logoutSuccessUrl("/");
     }
 
     // 로그인 인증 정보를 받아 토큰을 발급할 수 있도록 필터 등록

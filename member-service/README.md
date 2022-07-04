@@ -5,7 +5,7 @@
 0. 상태체크(/member/actuator/helath-info)
 1. 회원가입(/member/api/join)
 2. 로그인(/member/login)
-3. 토큰 재발급()
+3. 토큰 재발급
 4. 회원정보 수정
 5. 회원탈퇴
 

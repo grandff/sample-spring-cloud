@@ -1,23 +1,32 @@
 package com.cloud.sample.service.memberservice.api;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
-
-import com.cloud.sample.service.memberservice.service.MemberService;
-import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
-import com.cloud.sample.service.memberservice.api.dto.MemberJoinRequestDto;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cloud.sample.service.memberservice.api.dto.MemberJoinRequestDto;
+import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
+import com.cloud.sample.service.memberservice.config.TokenProvider;
+import com.cloud.sample.service.memberservice.service.MemberService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 public class MemberController{
 
     private final MemberService memberService;
+    private final TokenProvider tokenProvider;
     
     // 서비스상태확인(GET)
     @GetMapping("/actuator/helath-info")
@@ -48,5 +57,12 @@ public class MemberController{
     @ResponseStatus(HttpStatus.CREATED)
     public Boolean join(@RequestBody @Valid MemberJoinRequestDto requestDto){
         return memberService.join(requestDto);
+    }
+
+    // 토큰 refresh
+    @PutMapping("/api/token/refresh")
+    public void refreshToken(HttpServletRequest request ,HttpServletResponse response){
+        String refreshToken = request.getHeader(HttpHeaders.AUTHORIZATION);
+        tokenProvider.refreshToken(refreshToken, response);
     }
 }

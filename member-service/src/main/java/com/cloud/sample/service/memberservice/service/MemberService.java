@@ -74,8 +74,7 @@ public class MemberService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException{
         // 로그인 실패시 로그에 남기기 위해 설정
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        request.setAttribute("userId", userId);
-        System.out.println("아이디 정보 :: " + userId);
+        request.setAttribute("userId", userId);        
 
         // 사용자 존재여부 확인
         Member member = memberRepository.findByUserId(userId)

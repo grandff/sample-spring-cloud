@@ -2,16 +2,9 @@ package com.cloud.sample.service.memberservice.api.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import com.cloud.sample.service.memberservice.domain.Member;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 // 로그인시 필요정보만 담긴 dto
 @Getter

@@ -78,7 +78,7 @@ GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/use
 // AUTHORIZATION에 로그인 후 리턴 받은 토큰을 넣어야함 
 POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/board/api/post/insert
 Content-Type: application/json; charset=UTF-8
-AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJBbGwiLCJleHAiOjE2NTY1NzE2Njd9._pwRo2tqbh4lFB4SW7-Ov3V1EzEv3LdnkguWBcla_RpAvvmpxNeprgS04DNqoiCzYirpPln7gNG1KTorGC5n1A
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJBbGwiLCJleHAiOjE2NTY2NDA0NDF9.LkK8O7Hh4K_RSlQ16Ut948FN97E4g6iqnxFy8PcJoCJPOmY1Bm18PsuafunKiQWczRhlXVy36zXLBUBN0ZtkXw
 
 {   
     "title" : "제목입니다5",
@@ -105,3 +105,32 @@ GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/boa
 
 // board - list
 GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/board/api/post/list
+
+###
+
+// board - update
+// AUTHORIZATION에 로그인 후 리턴 받은 토큰을 넣어야함 
+// 동일한 아이디
+POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/board/api/post/update
+Content-Type: application/json; charset=UTF-8
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJBbGwiLCJleHAiOjE2NTY2NDA0NDF9.LkK8O7Hh4K_RSlQ16Ut948FN97E4g6iqnxFy8PcJoCJPOmY1Bm18PsuafunKiQWczRhlXVy36zXLBUBN0ZtkXw
+
+{   
+    "id" : 4,
+    "title" : "제목입니다 수정입니다",
+    "ctt" : "내용입니다 수정본입니다."
+}
+
+###
+
+// board - update
+// AUTHORIZATION에 로그인 후 리턴 받은 토큰을 넣어야함 
+// 다른 아이디
+POST https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/board/api/post/insert
+Content-Type: application/json; charset=UTF-8
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJBbGwiLCJleHAiOjE2NTY2NDA0NDF9.LkK8O7Hh4K_RSlQ16Ut948FN97E4g6iqnxFy8PcJoCJPOmY1Bm18PsuafunKiQWczRhlXVy36zXLBUBN0ZtkXw
+
+{   
+    "title" : "제목입니다5",
+    "ctt" : "내용입니다5."
+}
