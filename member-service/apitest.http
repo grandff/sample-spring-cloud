@@ -26,7 +26,7 @@ Content-Type: application/json; charset=UTF-8
 
 // 회원조회
 GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/api/detail/test
-AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NjkyNjEwMX0.ak8NRqM-TfKMUGEbRrMVCs1NiSPCUgG1dbhgbsyLP8c9f4lif4CnaaG0L8TdWHGfY7vXa5V9OI0zMLK-S48Lew
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NzAwMTI4OX0.ek9QyNIXJ6JiEnmdZEwq2OegCLwOc6ElgbdxbbGpHOwYdYtG7WgwBoyhn6DuPvfj2xP_53fMwy17OqUrLwU7qA
 
 ###
 
@@ -36,11 +36,49 @@ Content-Type: application/json; charset=UTF-8
 
 {   
     "userId" : "test",
-    "password" : "cjswo123!"
+    "password" : "cjswo456!"
 }
 
 ###
 
 // 로그아웃 제대로 되는거 맞음?????
-GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/lgout
-AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NjkyNjEwMX0.ak8NRqM-TfKMUGEbRrMVCs1NiSPCUgG1dbhgbsyLP8c9f4lif4CnaaG0L8TdWHGfY7vXa5V9OI0zMLK-S48Lew
+GET https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/logout
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NzAwMTI4OX0.ek9QyNIXJ6JiEnmdZEwq2OegCLwOc6ElgbdxbbGpHOwYdYtG7WgwBoyhn6DuPvfj2xP_53fMwy17OqUrLwU7qA
+
+
+###
+
+// 회원수정
+// 본인 아이디 
+PUT https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/api/update/test
+Content-Type: application/json; charset=UTF-8
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NzAwMTI4OX0.ek9QyNIXJ6JiEnmdZEwq2OegCLwOc6ElgbdxbbGpHOwYdYtG7WgwBoyhn6DuPvfj2xP_53fMwy17OqUrLwU7qA
+
+{
+    "userName" : "테스트이름변경",
+    "email" : "dev2@dev.dev",
+    "password" : "cjswo456!"
+}
+
+
+###
+
+// 회원수정
+// 다른 토큰으로 확인(수정불가해야 맞음)
+PUT https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/api/update/test
+Content-Type: application/json; charset=UTF-8
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiIwMSIsImV4cCI6MTY1NzAwMTI4OX0.ek9QyNIXJ6JiEnmdZEwq2OegCLwOc6ElgbdxbbGpHOwYdYtG7WgwBoyhn6DuPvfj2xP_53fMwy17OqUrLwU7qA
+
+{
+    "userName" : "테스트이름변경",
+    "email" : "dev2@dev.dev",
+    "password" : "cjswo456!"
+}
+
+###
+
+// 토큰재발급
+// 토큰 재발급하고 회원조회해보기
+PUT https://grandff-sample-spring-cloud-vw64pw99hp975-8000.githubpreview.dev/member/api/token/refresh
+Content-Type: application/json; charset=UTF-8
+AUTHORIZATION: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTcwODA3ODR9.XzWK6hapyyRCi-IzyZOhkzjmtJLRF5HlBshHnYHdibina53SzDUP3RJL6fuF6NxDAu9Pn5RSbx5d-VQ-Yx-7SQ

@@ -136,9 +136,13 @@ public class MemberService implements UserDetailsService {
         final String password = requestDto.getPassword() != null && !"".equals(requestDto.getPassword()) 
             ? passwordEncoder.encode(requestDto.getPassword())
             : member.get().getPassword();
+
+        // valid 체크가 안되어있는 것들은 기존 데이터 그대로 사용
+        final String tel = requestDto.getTel() != null && !"".equals(requestDto.getTel())
+            ? requestDto.getTel() : member.get().getTel();
                 
         // 정보 수정 처리
-        member.get().update(requestDto.getUserName(), password, requestDto.getEmail(), requestDto.getTel());
+        member.get().update(requestDto.getUserName(), password, requestDto.getEmail(), tel);
         
         return userId;
     }
