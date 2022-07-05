@@ -1,0 +1,9 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <!-- 각 view가 위치함 -->
+    <!-- js, css 위치 -->    
+    <th:block th:replace="layout/fragments/header :: headerFragment"></th:block>
+    <div>        
+        <div layout:fragment="content"></div>        
+    </div>
+    <th:block th:replace="layout/fragments/footer :: footerFragment"></th:block>        
+</html>

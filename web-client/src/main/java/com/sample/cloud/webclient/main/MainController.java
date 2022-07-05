@@ -11,6 +11,6 @@ public class MainController {
     // 메인화면 이동
     @GetMapping(value = "/")
     public String goHome(HttpServletRequest request){
-        return "content/home";
+        return "index";
     }
 }
