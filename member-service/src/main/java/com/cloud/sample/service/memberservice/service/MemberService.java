@@ -1,6 +1,7 @@
 package com.cloud.sample.service.memberservice.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.cloud.sample.service.memberservice.api.dto.MemberJoinRequestDto;
 import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
+import com.cloud.sample.service.memberservice.api.dto.MemberUpdateRequestDto;
 import com.cloud.sample.service.memberservice.common.CommonMessageException;
 import com.cloud.sample.service.memberservice.domain.Member;
 import com.cloud.sample.service.memberservice.domain.MemberRepository;
@@ -121,4 +123,23 @@ public class MemberService implements UserDetailsService {
                 .orElseThrow(() -> new CommonMessageException("해당 사용자가 존재하지 않습니다."));
     }
     
+    // 사용자 정보 수정
+    @Transactional
+    public String updateMember(String userId, MemberUpdateRequestDto requestDto){        
+        // 일단 사용자 entity를 가져온다음에
+        Optional<Member> member = memberRepository.findByUserId(userId);
+        if(!member.isPresent()){
+            throw new CommonMessageException("사용자가 존재하지 않습니다.");
+        }
+
+        // 새로 변경할 패스워드가 있으면 가져오고 없으면 기존꺼 사용
+        final String password = requestDto.getPassword() != null && !"".equals(requestDto.getPassword()) 
+            ? passwordEncoder.encode(requestDto.getPassword())
+            : member.get().getPassword();
+                
+        // 정보 수정 처리
+        member.get().update(requestDto.getUserName(), password, requestDto.getEmail(), requestDto.getTel());
+        
+        return userId;
+    }
 }

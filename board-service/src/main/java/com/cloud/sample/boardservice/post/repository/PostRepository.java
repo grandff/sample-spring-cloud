@@ -56,7 +56,8 @@ public class PostRepository {
 
     // update
     public Integer update(Post post, String userId){           
-        String query = PostSql.UPDATE;
+        String query = PostSql.UPDATE;        
+        
         SqlParameterSource param = new MapSqlParameterSource("id", post.getId())
         .addValue("title", post.getTitle())
         .addValue("ctt", post.getCtt());

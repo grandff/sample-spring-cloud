@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cloud.sample.service.memberservice.api.dto.MemberJoinRequestDto;
 import com.cloud.sample.service.memberservice.api.dto.MemberResponseDto;
+import com.cloud.sample.service.memberservice.api.dto.MemberUpdateRequestDto;
+import com.cloud.sample.service.memberservice.common.CommonMessageException;
 import com.cloud.sample.service.memberservice.config.TokenProvider;
 import com.cloud.sample.service.memberservice.service.MemberService;
 
@@ -64,6 +67,18 @@ public class MemberController{
     public void refreshToken(HttpServletRequest request ,HttpServletResponse response){
         String refreshToken = request.getHeader(HttpHeaders.AUTHORIZATION);
         tokenProvider.refreshToken(refreshToken, response);
+    }
+
+    // 사용자 정보 업데이트
+    @PutMapping(value="/api/update/{userId}")
+    public String updateMember(@PathVariable String userId, @RequestBody @Valid MemberUpdateRequestDto requestDto){
+        // 본인인지 확인
+        final String authUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        if(!authUserId.equals(userId)){
+            throw new CommonMessageException("권한이 없습니다.");
+        }
+
+        return memberService.updateMember(userId, requestDto);
     }
 
 }

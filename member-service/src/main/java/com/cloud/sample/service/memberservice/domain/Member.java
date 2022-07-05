@@ -99,4 +99,13 @@ public class Member{
         return this;
     }
 
+    // 정보 수정
+    public Member update(String userName, String password, String email, String tel){
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.tel = tel;
+
+        return this;
+    }
 }
