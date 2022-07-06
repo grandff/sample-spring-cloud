@@ -146,4 +146,39 @@ public class MemberService implements UserDetailsService {
         
         return userId;
     }
+
+    // 이메일로 사용자 조회
+    public String findByEmail(String email){
+        Member member = memberRepository.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("해당 사용자는 존재하지 않습니다"));
+
+        return member.getUserId();
+    }
+
+    // 전화번호로 사용자 조회
+    public String findByTel(String tel){
+        Member member = memberRepository.findByTel(tel)
+            .orElseThrow(() -> new UsernameNotFoundException("해당 사용자는 존재하지 않습니다."));
+
+        return member.getUserId();
+    }
+
+    // 비밀번호 찾기
+    // 하려고 했는데 jpa 방식으로  하면 할게 많아서 일단 패스요..
+    /*
+    @Transactional
+    public Boolean findPassword(MemberFindPasswordRequestDto requestDto){
+        // 이메일주소와 아이디로 유저가 존재하는지 확인
+        Member member = memberRepository.findByEmailAndUserId(requestDto.getEmail(), requestDto.getUserId())
+            .orElseThrow(() -> new UsernameNotFoundException("해당 사용자가 존재하지 않습니다."));
+
+        // 원래는 이메일 전송이지만 여기서는 콘솔에 토큰값 로그만 찍을거임
+        final String tokenValue = UUID.randomUUID().toString().replaceAll("-", "");
+        System.out.println(tokenValue);
+
+        // 토큰값을 repository에 저장
+
+        // 완료 후 true 리턴
+    }
+    */
 }

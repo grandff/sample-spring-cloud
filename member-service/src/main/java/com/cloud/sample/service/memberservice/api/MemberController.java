@@ -81,4 +81,11 @@ public class MemberController{
         return memberService.updateMember(userId, requestDto);
     }
 
+    // 이메일로 사용자 아이디 찾기
+    @GetMapping("/api/find/userId/{mode}/{validVal}")
+    public String findUserIdByEmail(@PathVariable String mode, @PathVariable String validVal){
+        if(mode.equals("email")) return memberService.findByEmail(validVal);
+        else if(mode.equals("tel")) return memberService.findByTel(validVal);
+        else return new CommonMessageException("올바른 값이 아닙니다.");
+    }
 }
