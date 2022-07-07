@@ -80,6 +80,16 @@
             "projectName": "sample-service-maven",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-WebClientApplication<web-client>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sample.cloud.webclient.WebClientApplication",
+            "projectName": "web-client",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

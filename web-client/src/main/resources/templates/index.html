@@ -5,7 +5,21 @@
       layout:decorate="~{layout/layout}">        
     <th:block layout:fragment="content">
     	<div>
-            메인화면
+            <h2>메인화면</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능목록</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each = "rl : ${utilList}">
+                        <tr>
+                            <td th:text = "${ rl }"></td>
+                        </tr>
+                    </th:block>
+                </tbody>                
+            </table>
         </div>
     </th:block>
 </html>

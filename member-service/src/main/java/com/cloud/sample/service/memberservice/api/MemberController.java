@@ -86,6 +86,6 @@ public class MemberController{
     public String findUserIdByEmail(@PathVariable String mode, @PathVariable String validVal){
         if(mode.equals("email")) return memberService.findByEmail(validVal);
         else if(mode.equals("tel")) return memberService.findByTel(validVal);
-        else return new CommonMessageException("올바른 값이 아닙니다.");
+        else return "올바른 값이 아닙니다.";
     }
 }
