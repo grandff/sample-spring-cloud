@@ -6,7 +6,7 @@
     <th:block layout:fragment="content">
     	<div>
             <h2>회원가입 화면</h2>
-            <form name="joinForm" method="POST" action="">
+            <form name="joinForm" method="POST" action="/member/join">
                 <label>아이디</label>
                 <input type="text" name="userId" placeholder="아이디" maxlength="20"/>
                 <label>이름</label>
@@ -21,7 +21,7 @@
                 <input type="text" name="email2" maxlength="20" />
                 <label>전화번호</label>
                 <input type="text" name="tel" maxlength="20" />
-                <button>등록</button>
+                <button onclick="">등록</button>
             </form>
         </div>
     </th:block>
