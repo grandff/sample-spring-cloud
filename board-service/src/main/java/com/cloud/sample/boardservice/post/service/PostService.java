@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.cloud.sample.boardservice.common.CommonMessageException;
+//import com.cloud.sample.boardservice.common.CommonMessageException;
 import com.cloud.sample.boardservice.post.model.Post;
 import com.cloud.sample.boardservice.post.repository.PostRepository;
 
@@ -32,23 +32,25 @@ public class PostService {
     }
 
     // 게시글 수정
-    public Integer update(Post post, String userId){
+    public Integer update(Post post, String userId) throws Exception{
         findPostByCreatedBy(post.getId(), userId);
         return this.postRepository.update(post, userId);
     }
 
     // 게시글 번호, 작성자로 게시물 조회
     // 로그인 사용자가 작성자인지 확인
-    private void findPostByCreatedBy(Integer id, String userId) throws CommonMessageException{
+    private void findPostByCreatedBy(Integer id, String userId) throws Exception{
         if(userId == null || "".equals(userId)){
-            throw new CommonMessageException("로그인 후 이용해주세요.");
+            throw new Exception("로그인 후 이용해주세요.");
+            //throw new CommonMessageException("로그인 후 이용해주세요.");
         }
 
         List<Post> post = this.postRepository.detail(Long.valueOf(id)); // integer to long
         Post entity = post.get(0);
 
         if(!userId.equals(entity.getUserId())){
-            throw new CommonMessageException("권한이 없습니다.");
+            throw new Exception("로그인 후 이용해주세요.");
+            //throw new CommonMessageException("권한이 없습니다.");
         }          
     }
 

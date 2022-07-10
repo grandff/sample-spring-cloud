@@ -127,6 +127,13 @@
 			<artifactId>groovy-eclipse-compiler</artifactId>
 			<version>3.7.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<classifier>indy</classifier>
+			<version>3.0.10</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -162,7 +169,76 @@
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>			 
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version><!-- 3.6.2 is the minimum -->
+				<configuration>
+				<compilerId>groovy-eclipse-compiler</compilerId>
+				<compilerArguments>
+					<indy/><!-- optional; supported by batch 2.4.12-04+ -->
+					<configScript>config.groovy</configScript><!-- optional; supported by batch 2.4.13-02+ -->
+				</compilerArguments>
+				<failOnWarning>true</failOnWarning><!-- optional; supported by batch 2.5.8-02+ -->
+				</configuration>
+				<dependencies>
+				<dependency>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy-eclipse-compiler</artifactId>
+					<version>3.7.1</version>
+				</dependency>
+				<dependency>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy-eclipse-batch</artifactId>
+					<version>3.0.10-02</version>
+				</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy-eclipse-compiler</artifactId>
+				<version>3.7.1</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.12</version>
+				<executions>
+				<execution>
+					<id>add-source</id>
+					<phase>generate-sources</phase>
+					<goals>
+					<goal>add-source</goal>
+					</goals>
+					<configuration>
+					<sources>
+						<source>src/main/groovy</source>
+					</sources>
+					</configuration>
+				</execution>
+				<execution>
+					<id>add-test-source</id>
+					<phase>generate-test-sources</phase>
+					<goals>
+					<goal>add-test-source</goal>
+					</goals>
+					<configuration>
+					<sources>
+						<source>src/test/groovy</source>
+					</sources>
+					</configuration>
+				</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<!-- 최신 컴파일러 플러그인 설정 -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>groovy-plugins-release</id>
+			<url>https://groovy.jfrog.io/artifactory/plugins-release</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
