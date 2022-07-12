@@ -24,3 +24,7 @@ management:
   health:
     mail:
       enabled: false
+
+  # mybatis 설정
+  mybatis:
+    type-aliases-package: com.cloud.sample.boardservice.post.model

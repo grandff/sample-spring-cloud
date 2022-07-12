@@ -8,7 +8,7 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cloud.sample</groupId>
+	<groupId>com.sample.cloud</groupId>
 	<artifactId>board-service</artifactId>
 	<version>0.0.1</version>
 	<name>board-service</name>
@@ -17,6 +17,13 @@
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 	</properties>
+	<repositories>
+		<repository>
+			<id>local-repository</id> 
+			<name>local repository</name> 
+			<url>file://${project.basedir}/lib</url> 
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -136,14 +143,18 @@
 		</dependency>
 -->
 		<!-- common module -->
-		<dependency>
+		<dependency>			
 			<groupId>com.sample.cloud</groupId>
-			<artifactId>commonmodule</artifactId>			
-			<scope>system</scope>
-			<version>0.0.1</version>
-			<systemPath>${basedir}/src/libs/common-module-0.0.1.jar</systemPath>
+			<artifactId>common-module</artifactId>
+			<version>0.0.1</version>			
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.2.2</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
