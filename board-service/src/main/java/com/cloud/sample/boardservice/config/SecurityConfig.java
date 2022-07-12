@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-import com.cloud.sample.boardservice.common.config.AuthenticationFilter;
+import com.sample.cloud.commonmodule.common.config.AuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 

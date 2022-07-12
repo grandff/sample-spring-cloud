@@ -1,6 +1,6 @@
-package com.cloud.sample.boardservice.common;
+package com.sample.cloud.common.commonmodule.common;
 
-import com.cloud.sample.boardservice.common.dto.ErrorCode;
+import com.sample.cloud.common.commonmodule.common.dto.ErrorCode;
 
 public class CommonMessageException extends CommonException {
 

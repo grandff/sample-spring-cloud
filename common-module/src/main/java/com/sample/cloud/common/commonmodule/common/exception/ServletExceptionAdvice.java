@@ -1,4 +1,4 @@
-package com.cloud.sample.boardservice.common.exception;
+package com.sample.cloud.common.commonmodule.common.exception;
 
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import com.cloud.sample.boardservice.common.CommonException;
-import com.cloud.sample.boardservice.common.CommonMessageException;
-import com.cloud.sample.boardservice.common.dto.ErrorCode;
-import com.cloud.sample.boardservice.common.dto.ErrorResponse;
+import com.sample.cloud.common.commonmodule.common.CommonException;
+import com.sample.cloud.common.commonmodule.common.CommonMessageException;
+import com.sample.cloud.common.commonmodule.common.dto.ErrorCode;
+import com.sample.cloud.common.commonmodule.common.dto.ErrorResponse;
 
 import io.jsonwebtoken.ExpiredJwtException;
 //import javassist.NotFoundException;

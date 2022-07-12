@@ -1,4 +1,4 @@
-package com.cloud.sample.boardservice.common.dto;
+package com.sample.cloud.common.commonmodule.common.dto;
 
 // from egovframework common module
 public enum ErrorCode {

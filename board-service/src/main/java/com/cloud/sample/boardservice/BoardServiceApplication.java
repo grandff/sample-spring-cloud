@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"com.cloud.sample.boardservice"})
+@ComponentScan(basePackages = {"com.sample.cloud.commonmodule.common", "com.cloud.sample.boardservice"}) 
 @SpringBootApplication
 @EnableDiscoveryClient
 //@EnableFeignClients(basePackages = {"com.cloud.sample.service.sampleservice.client"})

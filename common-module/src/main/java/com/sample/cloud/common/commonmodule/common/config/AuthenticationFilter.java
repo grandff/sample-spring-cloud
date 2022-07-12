@@ -1,4 +1,4 @@
-package com.cloud.sample.boardservice.common.config;
+package com.sample.cloud.common.commonmodule.common.config;
 
 import java.io.IOException;
 import java.util.ArrayList;
